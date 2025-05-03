@@ -61,7 +61,14 @@
   # services.displayManager.sddm.wayland.enable = true;
   # services.desktopManager.plasma6.enable = true;
 
+	services.flatpak.enable = true;
+
 	virtualisation.docker.enable = true;
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = [];
+	};
 
 	users.users.seolman = {
 		isNormalUser = true;
