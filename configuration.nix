@@ -33,22 +33,40 @@
 		];
 	};
 
+	security.rtkit.enable = true;
+	services.pipewire = {
+	  enable = true;
+	  alsa.enable = true;
+	  alsa.support32Bit = true;
+	  pulse.enable = true;
+	};
+
 	fonts = {
 		enableDefaultPackages = true;
 		packages = with pkgs; [
+			noto-fonts-cjk-sans
 			nerd-fonts.jetbrains-mono
-			nerd-fonts.d2coding
 		];
 	};
 
 	services.openssh.enable = true;
+
 	services.tailscale.enable = true;
+
 	services.desktopManager.cosmic.enable = true;
+	services.displayManager.cosmic-greeter.enable = true;
+
+  # services.xserver.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+
+	virtualisation.docker.enable = true;
 
 	users.users.seolman = {
 		isNormalUser = true;
 		description = "seolman";
-		extraGroups = [ "networkmanager" "wheel" ];
+		extraGroups = [ "networkmanager" "wheel" "docker" ];
 		packages = with pkgs; [];
 	};
 
@@ -73,6 +91,7 @@
 		wl-clipboard
 
 		gitu
+		gitui
 		lazygit
 
 		rsync
