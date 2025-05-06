@@ -98,6 +98,7 @@
 	nixpkgs.config.allowUnfree = true;
 
 	programs.niri.enable = true;
+
 	programs.waybar.enable = true;
 
 	environment.systemPackages = with pkgs; [
@@ -182,11 +183,9 @@
 		obs-studio
 	];
 
-
 	environment.variables = {
 		EDITOR = "hx";
 	};
-
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	
