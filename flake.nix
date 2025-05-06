@@ -25,10 +25,12 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, nur, nixos-wsl, darwin, stylix, ... }: {
+	outputs = { self, nixpkgs, home-manager, nur, nixos-wsl, darwin, stylix, ... }: let
+		system = "x86_64-linux";
+	in {
 		nixosConfigurations = {
 			nixoslaptop = nixpkgs.lib.nixosSystem {
-				system = "x86_64-linux";
+				inherit system;
 				modules = [
 					home-manager.nixosModules.home-manager
 					nur.modules.nixos.default

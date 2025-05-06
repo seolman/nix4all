@@ -33,6 +33,13 @@
 		];
 	};
 
+	hardware.bluetooth = {
+		enable = true;
+		# package = with pkgs; [
+		# 	blueman
+		# ];
+	};
+
 	security.rtkit.enable = true;
 	services.pipewire = {
 	  enable = true;
@@ -41,9 +48,12 @@
 	  pulse.enable = true;
 	};
 
+	security.polkit.enable = true;
+
 	fonts = {
 		enableDefaultPackages = true;
 		packages = with pkgs; [
+			google-fonts
 			noto-fonts-cjk-sans
 			nerd-fonts.jetbrains-mono
 		];
@@ -53,13 +63,18 @@
 
 	services.tailscale.enable = true;
 
-	services.desktopManager.cosmic.enable = true;
-	services.displayManager.cosmic-greeter.enable = true;
+	# services.desktopManager.cosmic.enable = true;
+	# services.displayManager.cosmic-greeter.enable = true;
 
   # services.xserver.enable = true;
   # services.displayManager.sddm.enable = true;
   # services.displayManager.sddm.wayland.enable = true;
   # services.desktopManager.plasma6.enable = true;
+
+	# services.xserver.enable = true;
+	# services.xserver.desktopManager.gnome.enable = true;
+
+	services.kanata.enable = true;
 
 	services.flatpak.enable = true;
 
@@ -67,7 +82,10 @@
 
 	xdg.portal = {
 		enable = true;
-		extraPortals = [];
+		config.common.default = "*";
+		extraPortals = with pkgs; [
+			xdg-desktop-portal-gtk
+		];
 	};
 
 	users.users.seolman = {
@@ -78,6 +96,9 @@
 	};
 
 	nixpkgs.config.allowUnfree = true;
+
+	programs.niri.enable = true;
+	programs.waybar.enable = true;
 
 	environment.systemPackages = with pkgs; [
 		git
@@ -144,14 +165,28 @@
 		google-chrome
 		firefox
 		wezterm
+		kitty
 		ghostty
+		alacritty
 		neovide
+		zed-editor
+		emacs
 		wluma # brightness
+		zathura
+		sioyek
+		fuzzel
+		nemo
+		grimblast
+		nwg-look
+		obsidian
+		obs-studio
 	];
+
 
 	environment.variables = {
 		EDITOR = "hx";
 	};
+
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	
