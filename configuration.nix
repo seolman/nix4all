@@ -119,6 +119,10 @@
 
 	services.syncthing = {
 		enable = true;
+		user = "seolman";
+		group = "users";
+		dataDir = "/home/seolman/Documents";
+		configDir = "/home/seolman/.config/syncthing";
 	};
 
 	virtualisation.libvirtd = {
@@ -243,7 +247,7 @@
 		zathura
 		sioyek
 		fuzzel
-		nemo
+		nemo-with-extensions
 		grimblast
 		nwg-look
 		obsidian
@@ -266,7 +270,6 @@
 		mpv-unwrapped
 		pass
 		gnupg
-		warp
 		swww
 		adw-gtk3
 		adwaita-icon-theme
