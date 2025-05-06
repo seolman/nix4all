@@ -25,7 +25,7 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, nur, nixos-wsl, darwin, stylix, ... }: let
+	outputs = { self, nixpkgs, home-manager, nur, nixos-wsl, darwin, stylix, ... }@inputs: let
 		system = "x86_64-linux";
 	in {
 		nixosConfigurations = {

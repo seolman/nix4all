@@ -75,7 +75,29 @@
 	# services.xserver.enable = true;
 	# services.xserver.desktopManager.gnome.enable = true;
 
-	services.kanata.enable = true;
+	services.kanata = {
+		enable = true;
+		keyboards."main" = {
+			config = ''
+				(defsrc
+					caps
+					lctl
+				)
+
+				(defalias
+					cap (tap-hold 100 100 esc lctl)
+				)
+
+				(deflayer main
+					@cap
+					caps
+				)
+			'';
+			devices = [
+				"dev/input/by-path/platform-i8042-serio-0-event-kbd"
+			];
+		};
+	};
 
 	services.flatpak.enable = true;
 
@@ -166,6 +188,7 @@
 
 		google-chrome
 		firefox
+		nur.repos.novel2430.zen-browser-bin
 		wezterm
 		kitty
 		ghostty
@@ -182,6 +205,13 @@
 		nwg-look
 		obsidian
 		obs-studio
+		vesktop
+		vscode
+		brightnessctl
+
+		whitesur-gtk-theme
+		whitesur-cursors
+		whitesur-icon-theme
 	];
 
 	environment.variables = {
