@@ -50,7 +50,7 @@ terminals: nushell, alacritty, warp, ghostty, kitty, wezterm, tmux, zellij
 
 file managers: yazi, nemo, trashy
 
-sync: rsync, localshare, syncthing
+sync: rsync, localsend, syncthing
 
 zip: p7zip
 

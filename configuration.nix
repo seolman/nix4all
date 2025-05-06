@@ -33,12 +33,25 @@
 		];
 	};
 
-	hardware.bluetooth = {
-		enable = true;
-		# package = with pkgs; [
-		# 	blueman
-		# ];
+	services.auto-cpufreq.enable = true;
+	services.auto-cpufreq.settings = {
+	  battery = {
+	     governor = "powersave";
+	     turbo = "never";
+	  };
+	  charger = {
+	     governor = "performance";
+	     turbo = "auto";
+	  };
 	};
+
+	services.printing = {
+		enable = true;
+		drivers = with pkgs; [ gutenprint hplip splix ];
+		cups-pdf.enable = true;
+	};
+
+	hardware.bluetooth.enable = true;
 	services.blueman.enable = true;
 
 	security.rtkit.enable = true;
@@ -53,9 +66,10 @@
 
 	fonts = {
 		enableDefaultPackages = true;
+		fontconfig.enable = true;
 		packages = with pkgs; [
-			google-fonts
 			noto-fonts-cjk-sans
+			google-fonts
 			nerd-fonts.jetbrains-mono
 		];
 	};
@@ -89,7 +103,7 @@
 				)
 
 				(deflayer main
-					@cap
+					lctl
 					caps
 				)
 			'';
@@ -99,7 +113,19 @@
 		};
 	};
 
+	services.mpd.enable = true;
+
 	services.flatpak.enable = true;
+
+	services.syncthing = {
+		enable = true;
+	};
+
+	virtualisation.libvirtd = {
+		enable = true;
+		qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+	};
+	programs.virt-manager.enable = true;
 
 	virtualisation.docker.enable = true;
 
@@ -108,13 +134,14 @@
 		config.common.default = "*";
 		extraPortals = with pkgs; [
 			xdg-desktop-portal-gtk
+			xdg-desktop-portal-gnome
 		];
 	};
 
 	users.users.seolman = {
 		isNormalUser = true;
 		description = "seolman";
-		extraGroups = [ "networkmanager" "wheel" "docker" ];
+		extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
 		packages = with pkgs; [];
 	};
 
@@ -123,6 +150,20 @@
 	programs.niri.enable = true;
 
 	programs.waybar.enable = true;
+
+	hardware.graphics = {
+		enable = true;
+		enable32Bit = true;
+	};
+
+	services.xserver.videoDrivers = [ "amdgpu" ];
+
+	programs.steam = {
+		enable = true;
+		gamescopeSession.enable = true;
+	};
+
+	programs.gamemode.enable = true;
 
 	environment.systemPackages = with pkgs; [
 		git
@@ -141,12 +182,14 @@
 		resvg
 		imagemagick
 		wl-clipboard
-
 		gitu
 		gitui
 		lazygit
-
 		rsync
+		fzf
+		skim
+		bat
+		bottom
 
 		gcc
 		gnumake
@@ -208,10 +251,32 @@
 		vesktop
 		vscode
 		brightnessctl
-
-		whitesur-gtk-theme
-		whitesur-cursors
-		whitesur-icon-theme
+		libreoffice-unwrapped
+		moonlight
+		nsxiv
+		gimp3
+		aseprite
+		blender
+		grimblast
+		hyprpicker
+		cava
+		trashy
+		localsend
+		udiskie
+		mpv-unwrapped
+		pass
+		gnupg
+		warp
+		swww
+		adw-gtk3
+		adwaita-icon-theme
+		mako
+		nm-tray
+		xwayland-satellite
+		waydroid
+		mangohud
+		protonup-qt
+		lutris
 	];
 
 	environment.variables = {
