@@ -1,6 +1,7 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
 	imports = [
-		./hardware-configuration.nix
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
 	];
 
 	boot.loader.systemd-boot.enable = true;
@@ -150,10 +151,17 @@
 		packages = with pkgs; [];
 	};
 
+    home-manager = {
+      extraSpecialArgs = { inherit inputs; };
+      users = {
+        "seolman" = import ./home.nix;
+      };
+    };
+
 	nixpkgs.config.allowUnfree = true;
 
 	programs.niri.enable = true;
-	programs.hyprland.enable = true;
+	# programs.hyprland.enable = true;
 
 	programs.waybar.enable = true;
 
@@ -249,6 +257,7 @@
 		zathura
 		sioyek
 		fuzzel
+		anyrun
 		nemo-with-extensions
 		grimblast
 		nwg-look
@@ -258,7 +267,7 @@
 		vscode
 		brightnessctl
 		libreoffice-unwrapped
-		moonlight
+		moonlight-qt
 		nsxiv
 		gimp3
 		aseprite

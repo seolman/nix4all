@@ -27,15 +27,17 @@
 
 	outputs = { self, nixpkgs, home-manager, nur, nixos-wsl, darwin, stylix, ... }@inputs: let
 		system = "x86_64-linux";
+    packages = nixpkgs.legacyPackages.${system};
 	in {
 		nixosConfigurations = {
 			nixoslaptop = nixpkgs.lib.nixosSystem {
 				inherit system;
+                specialArgs = { inherit inputs; };
 				modules = [
 					home-manager.nixosModules.home-manager
 					nur.modules.nixos.default
 					stylix.nixosModules.stylix
-					./configuration.nix
+					./hosts/laptop/configuration.nix
 				];
 			};	
 			nixoswsl = nixpkgs.lib.nixosSystem {
