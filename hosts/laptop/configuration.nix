@@ -229,6 +229,16 @@ engine:
 
 	programs.gamemode.enable = true;
 
+	programs.starship = {
+		enable = true;
+		presets = [ "plain-text-symbols" ];
+	};
+
+	programs.fzf = {
+		fuzzyCompletion = true;
+		keybindings = true;
+	};
+
 	environment.systemPackages = with pkgs; [
 		git
 		tmux
@@ -314,11 +324,11 @@ engine:
 		grimblast
 		nwg-look
 		obsidian
-		obs-studio
+		obs-studio # screen capture not working
 		vesktop
 		# vscode
 		brightnessctl
-		libreoffice-unwrapped
+		# libreoffice-unwrapped # not working
 		moonlight-qt
 		gimp3
 		# aseprite-unfree # not working
@@ -347,12 +357,14 @@ engine:
 		sxhkd
 		wev
 		font-manager
+		pwvucontrol
 	];
 
 	environment.variables = {
 		EDITOR = "hx";
 		VISUAL = "neovide";
 		NIXOS_OZONE_WL = "1";
+		QT_QPA_PLATFORM = "wayland";
 	};
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
