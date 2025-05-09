@@ -7,8 +7,8 @@ sudo nixos-rebuild switch --flake .#<hostname>
 ## TODO
 
 1. window manager
-
-2.
+2. status bar
+3. 
 
 ---
 

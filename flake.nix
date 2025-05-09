@@ -32,7 +32,7 @@
 		nixosConfigurations = {
 			nixoslaptop = nixpkgs.lib.nixosSystem {
 				inherit system;
-                specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs; };
 				modules = [
 					home-manager.nixosModules.home-manager
 					nur.modules.nixos.default
@@ -47,7 +47,7 @@
 					nur.modules.nixos.default
 					stylix.nixosModules.stylix
 					nixos-wsl.nixosModules.default
-					./configuration.nix
+					./hosts/wsl/configuration.nix
 				];
 			};	
 		};

@@ -26,15 +26,31 @@
 	};
 	i18n.inputMethod = {
 		enable = true;
-		type = "fcitx5";
-		fcitx5.addons = with pkgs; [
-			fcitx5-mozc
-			fcitx5-gtk
-			fcitx5-hangul
-		];
+		type = "kime";
+		kime = {
+			iconColor = "White";
+			daemonModules = [ "Xim" "Wayland" ];
+			extraConfig = ''
+engine:
+  global_hotkeys:
+    S-Space:
+      behavior: !Toggle
+      - Hangul
+      - Latin
+      result: Consume
+    Esc:
+      behavior: !Switch Latin
+      result: Bypass'';
+		};
+		# type = "fcitx5";
+		# fcitx5.addons = with pkgs; [
+		# 	fcitx5-mozc
+		# 	fcitx5-gtk
+		# 	fcitx5-hangul
+		# ];
 	};
 
-	services.power-profiles-daemon.enable = false;
+	# services.power-profiles-daemon.enable = false;
 	services.auto-cpufreq.enable = true;
 	services.auto-cpufreq.settings = {
 	  battery = {
@@ -53,34 +69,56 @@
 		cups-pdf.enable = true;
 	};
 
-	hardware.bluetooth.enable = true;
+	hardware.bluetooth = {
+		enable = true;
+		powerOnBoot = true;
+		settings = { General = { Experimental = true; }; };
+	};
 	services.blueman.enable = true;
 
 	security.rtkit.enable = true;
 	services.pipewire = {
 	  enable = true;
+		audio.enable = true;
 	  alsa.enable = true;
 	  alsa.support32Bit = true;
 	  pulse.enable = true;
+		jack.enable = true;
+		wireplumber.enable = true;
 	};
 
 	security.polkit.enable = true;
+	security.soteria.enable = true;
 
 	fonts = {
-		enableDefaultPackages = true;
-		fontconfig.enable = true;
+		enableDefaultPackages = false;
 		packages = with pkgs; [
+			noto-fonts
 			noto-fonts-cjk-sans
-			google-fonts
+			noto-fonts-cjk-serif
+			noto-fonts-emoji
 			nerd-fonts.jetbrains-mono
+			nanum
 		];
+		fontconfig = {
+			enable = true;
+			defaultFonts.serif = [ "NanumSquareRound Bold" ];
+			defaultFonts.sansSerif = [ "NanumSquareRound Bold" ];
+			defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
+			defaultFonts.emoji = [ "Noto Color Emoji" ];
+		};
 	};
 
 	services.openssh.enable = true;
 
 	services.tailscale.enable = true;
 
-	services.desktopManager.cosmic.enable = true;
+	# programs.uwsm = {
+	# 	enable = true;
+	# 	waylandCompositors = {};
+	# };
+
+	# services.desktopManager.cosmic.enable = true;
 	# services.displayManager.cosmic-greeter.enable = true;
 
   # services.xserver.enable = true;
@@ -118,6 +156,13 @@
 	services.mpd.enable = true;
 
 	services.flatpak.enable = true;
+	systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
 
 	services.syncthing = {
 		enable = true;
@@ -135,14 +180,18 @@
 
 	virtualisation.docker.enable = true;
 
+	# virtualisation.waydroid.enable = true;
+
 	xdg.portal = {
 		enable = true;
 		config.common.default = "*";
 		extraPortals = with pkgs; [
 			xdg-desktop-portal-gtk
 			xdg-desktop-portal-gnome
+			xdg-desktop-portal-wlr
 		];
 	};
+	services.gnome.gnome-keyring.enable = true;
 
 	users.users.seolman = {
 		isNormalUser = true;
@@ -161,9 +210,10 @@
 	nixpkgs.config.allowUnfree = true;
 
 	programs.niri.enable = true;
+
 	# programs.hyprland.enable = true;
 
-	programs.waybar.enable = true;
+	# programs.waybar.enable = true;
 
 	hardware.graphics = {
 		enable = true;
@@ -195,6 +245,7 @@
 		zoxide
 		resvg
 		imagemagick
+		ghostscript
 		wl-clipboard
 		gitu
 		gitui
@@ -204,6 +255,7 @@
 		skim
 		bat
 		bottom
+		translate-shell
 
 		gcc
 		gnumake
@@ -245,32 +297,31 @@
 
 		google-chrome
 		firefox
-		nur.repos.novel2430.zen-browser-bin
-		wezterm
+		# nur.repos.natsukium.zen-browser
+		# wezterm
 		kitty
-		ghostty
-		alacritty
+		# ghostty
+		# alacritty
+		# rio
 		neovide
-		zed-editor
-		emacs
-		wluma # brightness
-		zathura
-		sioyek
+		# zed-editor
+		# emacs
+		# zathura
+		# sioyek
 		fuzzel
-		anyrun
+		# anyrun
 		nemo-with-extensions
 		grimblast
 		nwg-look
 		obsidian
 		obs-studio
 		vesktop
-		vscode
+		# vscode
 		brightnessctl
 		libreoffice-unwrapped
 		moonlight-qt
-		nsxiv
 		gimp3
-		aseprite
+		# aseprite-unfree # not working
 		blender
 		grimblast
 		hyprpicker
@@ -284,18 +335,24 @@
 		swww
 		adw-gtk3
 		adwaita-icon-theme
-		mako
+		# mako
+		swaynotificationcenter
+		swayosd
 		networkmanagerapplet
-		nm-tray
 		xwayland-satellite
-		waydroid
 		mangohud
 		protonup-qt
 		lutris
+		ironbar
+		sxhkd
+		wev
+		font-manager
 	];
 
 	environment.variables = {
 		EDITOR = "hx";
+		VISUAL = "neovide";
+		NIXOS_OZONE_WL = "1";
 	};
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
