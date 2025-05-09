@@ -50,7 +50,6 @@ engine:
 		# ];
 	};
 
-	# services.power-profiles-daemon.enable = false;
 	services.auto-cpufreq.enable = true;
 	services.auto-cpufreq.settings = {
 	  battery = {
@@ -109,7 +108,10 @@ engine:
 		};
 	};
 
-	services.openssh.enable = true;
+	services.openssh = {
+		enable = true;
+		settings.PasswordAuthentication = false;
+	};
 
 	services.tailscale.enable = true;
 
@@ -135,18 +137,12 @@ engine:
 			config = ''
 				(defsrc
 					caps
-					lctl
-				)
-
+					lctl)
 				(defalias
-					cap (tap-hold 100 100 esc lctl)
-				)
-
+					cap (tap-hold 100 100 esc lctl))
 				(deflayer main
 					lctl
-					caps
-				)
-			'';
+					caps)'';
 			devices = [
 				"dev/input/by-path/platform-i8042-serio-0-event-kbd"
 			];
@@ -258,6 +254,7 @@ engine:
 		ghostscript
 		wl-clipboard
 		clapboard
+		gitoxide
 		gitu
 		gitui
 		lazygit
@@ -308,13 +305,13 @@ engine:
 
 		google-chrome
 		firefox
-		# nur.repos.natsukium.zen-browser
 		# wezterm
 		kitty
 		# ghostty
 		# alacritty
 		# rio
 		neovide
+		# vscode
 		# zed-editor
 		# emacs
 		# zathura
@@ -327,28 +324,25 @@ engine:
 		obsidian
 		obs-studio # screen capture not working
 		vesktop
-		# vscode
 		brightnessctl
-		# libreoffice-unwrapped # not working
+		libreoffice-unwrapped # not working
 		moonlight-qt
 		gimp3
-		# aseprite-unfree # not working
+		aseprite # not working
 		blender
-		grimblast
-		hyprpicker
+		# grimblast
+		# hyprpicker
 		cava
 		trashy
 		localsend
 		udiskie
 		mpv-unwrapped
-		pass
+		# pass
 		gnupg
 		swww
-		adw-gtk3
-		adwaita-icon-theme
 		# mako
-		swaynotificationcenter
-		swayosd
+		# swaynotificationcenter
+		# swayosd
 		networkmanagerapplet
 		xwayland-satellite
 		mangohud
@@ -359,6 +353,12 @@ engine:
 		wev
 		font-manager
 		pwvucontrol
+
+		adw-gtk3
+		adwaita-icon-theme
+		whitesur-gtk-theme
+		whitesur-icon-theme
+		whitesur-cursors
 	];
 
 	environment.variables = {
