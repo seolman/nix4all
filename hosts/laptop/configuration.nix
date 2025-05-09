@@ -257,6 +257,7 @@ engine:
 		imagemagick
 		ghostscript
 		wl-clipboard
+		clapboard
 		gitu
 		gitui
 		lazygit
