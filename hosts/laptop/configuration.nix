@@ -61,6 +61,7 @@ engine:
 	     turbo = "auto";
 	  };
 	};
+	services.upower.enable = true;
 
 	services.printing = {
 		enable = true;
@@ -149,7 +150,10 @@ engine:
 		};
 	};
 
-	services.mpd.enable = true;
+	services.mpd = {
+		enable = true;
+		# musicDirectory = "~/Music";
+	};
 
 	services.flatpak.enable = true;
 	systemd.services.flatpak-repo = {
@@ -189,6 +193,10 @@ engine:
 	};
 	services.gnome.gnome-keyring.enable = true;
 
+	xdg.terminal-exec.enable = true;
+
+	xdg.mime.defaultApplications = {};
+
 	users.users.seolman = {
 		isNormalUser = true;
 		description = "seolman";
@@ -206,6 +214,23 @@ engine:
 	nixpkgs.config.allowUnfree = true;
 
 	programs.niri.enable = true;
+
+	boot.plymouth = {
+		enable = true;
+		theme = "nixos-bgrt";
+		themePackages = with pkgs; [
+			nixos-bgrt-plymouth
+		];
+	};
+
+  services.greetd = {
+		enable = true;
+		settings = {
+			default_session = {
+				command = "${pkgs.greetd.greetd}/bin/agreety --cmd niri-session";
+			};
+		};
+	};
 
 	# programs.hyprland.enable = true;
 
@@ -233,6 +258,12 @@ engine:
 	programs.fzf = {
 		fuzzyCompletion = true;
 		keybindings = true;
+	};
+
+	qt = {
+		enable = true;
+		style = "adwaita-dark";
+		platformTheme = "qt5ct";
 	};
 
 	environment.systemPackages = with pkgs; [
@@ -319,16 +350,16 @@ engine:
 		fuzzel
 		# anyrun
 		nemo-with-extensions
+		# imv
 		grimblast
 		nwg-look
 		obsidian
 		obs-studio # screen capture not working
 		vesktop
 		brightnessctl
-		libreoffice-unwrapped # not working
+		libreoffice-qt6
 		moonlight-qt
 		gimp3
-		aseprite # not working
 		blender
 		# grimblast
 		# hyprpicker
@@ -336,7 +367,7 @@ engine:
 		trashy
 		localsend
 		udiskie
-		mpv-unwrapped
+		mpv
 		# pass
 		gnupg
 		swww
@@ -353,12 +384,17 @@ engine:
 		wev
 		font-manager
 		pwvucontrol
+		wayland-utils
+		inori
+		tailscale-systray
+		syncthingtray
+		gtklock
 
 		adw-gtk3
 		adwaita-icon-theme
 		whitesur-gtk-theme
 		whitesur-icon-theme
-		whitesur-cursors
+		apple-cursor
 	];
 
 	environment.variables = {
@@ -369,6 +405,12 @@ engine:
 	};
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+	nix.gc = {
+		automatic = true;
+		dates = "weekly";
+		options = "--delete-older-than 30d";
+	};
 	
 	system.stateVersion = "24.11";
 }
