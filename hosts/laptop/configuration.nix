@@ -295,6 +295,7 @@ engine:
 		bat
 		bottom
 		translate-shell
+		fastfetch
 
 		gcc
 		gnumake
@@ -409,7 +410,7 @@ engine:
 	nix.gc = {
 		automatic = true;
 		dates = "weekly";
-		options = "--delete-older-than 30d";
+		options = "--delete-older-than 7d";
 	};
 	
 	system.stateVersion = "24.11";
