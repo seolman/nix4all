@@ -23,6 +23,7 @@
 			url = "github:danth/stylix";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+		nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 	};
 
 	outputs = { self, nixpkgs, home-manager, nur, nixos-wsl, darwin, stylix, ... }@inputs: let

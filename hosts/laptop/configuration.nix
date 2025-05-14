@@ -50,6 +50,10 @@ engine:
 		# ];
 	};
 
+	powerManagement = {
+		enable = true;
+		powertop.enable = true;
+	};
 	services.auto-cpufreq.enable = true;
 	services.auto-cpufreq.settings = {
 	  battery = {
@@ -184,11 +188,12 @@ engine:
 
 	xdg.portal = {
 		enable = true;
-		config.common.default = "*";
+		# config.common.default = "*";
+		wlr.enable = true;
+		xdgOpenUsePortal = true;
 		extraPortals = with pkgs; [
 			xdg-desktop-portal-gtk
 			xdg-desktop-portal-gnome
-			xdg-desktop-portal-wlr
 		];
 	};
 	services.gnome.gnome-keyring.enable = true;
@@ -200,6 +205,7 @@ engine:
 	users.users.seolman = {
 		isNormalUser = true;
 		description = "seolman";
+		# shell = pkgs.zsh;
 		extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
 		packages = with pkgs; [];
 	};
@@ -215,21 +221,23 @@ engine:
 
 	programs.niri.enable = true;
 
-	boot.plymouth = {
-		enable = true;
-		theme = "nixos-bgrt";
-		themePackages = with pkgs; [
-			nixos-bgrt-plymouth
-		];
-	};
+	# boot.plymouth = {
+	# 	enable = true;
+	# 	theme = "nixos-bgrt";
+	# 	themePackages = with pkgs; [
+	# 		nixos-bgrt-plymouth
+	# 	];
+	# };
 
   services.greetd = {
 		enable = true;
 		settings = {
 			default_session = {
-				command = "${pkgs.greetd.greetd}/bin/agreety --cmd niri-session";
+				command = "niri-session";
+				user = "seolman";
 			};
 		};
+		greeterManagesPlymouth = true;
 	};
 
 	# programs.hyprland.enable = true;
@@ -250,6 +258,12 @@ engine:
 
 	programs.gamemode.enable = true;
 
+	qt = {
+		enable = true;
+		style = "adwaita-dark";
+		platformTheme = "qt5ct";
+	};
+
 	programs.starship = {
 		enable = true;
 		presets = [ "plain-text-symbols" ];
@@ -260,10 +274,35 @@ engine:
 		keybindings = true;
 	};
 
-	qt = {
+	programs.zoxide = {
 		enable = true;
-		style = "adwaita-dark";
-		platformTheme = "qt5ct";
+	};
+
+	programs.zsh = {
+		enable = true;
+		histSize = 10000;
+		enableBashCompletion = true;
+		syntaxHighlighting.enable = true;
+		autosuggestions.enable = true;
+	};
+
+	programs.tmux = {
+		enable = true;
+		plugins = with pkgs; [
+			tmuxPlugins.resurrect
+			tmuxPlugins.continuum
+		];
+		terminal = "screen-256color";
+		shortcut = "s";
+		historyLimit = 10000;
+		escapeTime = 0;
+		baseIndex = 1;
+		extraConfig = ''
+			run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
+			run-shell ${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/continuum.tmux
+
+			set -g @continuum-restore 'on'
+		'';
 	};
 
 	environment.systemPackages = with pkgs; [
@@ -296,6 +335,9 @@ engine:
 		bottom
 		translate-shell
 		fastfetch
+		xh
+		macchina
+		nushell
 
 		gcc
 		gnumake
@@ -332,16 +374,18 @@ engine:
 		sqls
 		ansible-language-server
 		vscode-langservers-extracted
+		superhtml
 		yaml-language-server
 		taplo
 
 		google-chrome
 		firefox
-		# wezterm
+		wezterm
 		kitty
-		# ghostty
-		# alacritty
-		# rio
+		ghostty
+		alacritty
+		rio
+		warp-terminal
 		neovide
 		# vscode
 		# zed-editor
@@ -356,6 +400,8 @@ engine:
 		nwg-look
 		obsidian
 		obs-studio # screen capture not working
+		obs-studio-plugins.wlrobs
+		showmethekey
 		vesktop
 		brightnessctl
 		libreoffice-qt6
@@ -390,6 +436,9 @@ engine:
 		tailscale-systray
 		syncthingtray
 		gtklock
+		wf-recorder
+		shared-mime-info
+		squeekboard
 
 		adw-gtk3
 		adwaita-icon-theme
@@ -403,6 +452,8 @@ engine:
 		VISUAL = "neovide";
 		NIXOS_OZONE_WL = "1";
 		QT_QPA_PLATFORM = "wayland";
+		_ZO_DOCTOR = "0";
+		GOPATH = "~/.go";
 	};
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
