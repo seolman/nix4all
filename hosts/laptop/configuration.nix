@@ -142,12 +142,12 @@ engine:
 			config = ''
 				(defsrc
 					caps
-					lctl)
+					lctl lmet lalt)
 				(defalias
 					cap (tap-hold 100 100 esc lctl))
 				(deflayer main
 					lctl
-					caps)'';
+					caps lalt lmet)'';
 			devices = [
 				"dev/input/by-path/platform-i8042-serio-0-event-kbd"
 			];
@@ -178,7 +178,9 @@ engine:
 
 	virtualisation.libvirtd = {
 		enable = true;
+		nss.enable = true;
 		qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+		qemu.swtpm.enable = true;
 	};
 	programs.virt-manager.enable = true;
 
@@ -188,7 +190,7 @@ engine:
 
 	xdg.portal = {
 		enable = true;
-		# config.common.default = "*";
+		config.common.default = "*";
 		wlr.enable = true;
 		xdgOpenUsePortal = true;
 		extraPortals = with pkgs; [
@@ -293,11 +295,14 @@ engine:
 			tmuxPlugins.continuum
 		];
 		terminal = "screen-256color";
-		shortcut = "s";
+		shortcut = "g";
 		historyLimit = 10000;
 		escapeTime = 0;
 		baseIndex = 1;
+		# TODO vi mode, split pane and new tab current dir
 		extraConfig = ''
+			set -g mode-keys vi
+
 			run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
 			run-shell ${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/continuum.tmux
 
@@ -328,6 +333,7 @@ engine:
 		gitu
 		gitui
 		lazygit
+		github-cli
 		rsync
 		fzf
 		skim
@@ -439,6 +445,9 @@ engine:
 		wf-recorder
 		shared-mime-info
 		squeekboard
+		rink
+		kalker
+		qalculate-gtk
 
 		adw-gtk3
 		adwaita-icon-theme
@@ -454,6 +463,12 @@ engine:
 		QT_QPA_PLATFORM = "wayland";
 		_ZO_DOCTOR = "0";
 		GOPATH = "~/.go";
+		FZF_DEFAULT_OPTS="
+   		--color=fg:#878580,bg:#100F0F,hl:#CECDC3
+   		--color=fg+:#878580,bg+:#1C1B1A,hl+:#CECDC3
+   		--color=border:#AF3029,header:#CECDC3,gutter:#100F0F
+   		--color=spinner:#24837B,info:#24837B,separator:#1C1B1A
+   		--color=pointer:#AD8301,marker:#AF3029,prompt:#AD8301";
 	};
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
