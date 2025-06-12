@@ -72,6 +72,7 @@
   services.auto-cpufreq.settings = {
     battery = {
       governor = "powersave";
+      energy_performance_preference = "powersave";
       turbo = "never";
     };
     charger = {
@@ -79,10 +80,10 @@
       turbo = "never";
     };
   };
-  services.thermald = {
-    enable = true;
-    ignoreCpuidCheck = true;
-  };
+  # services.thermald = {
+  #   enable = true;
+  #   ignoreCpuidCheck = true;
+  # };
   services.upower.enable = true;
 
   services.printing = {
@@ -105,6 +106,11 @@
     };
   };
   services.blueman.enable = true;
+
+  services.dbus = {
+    enable = true;
+    implementation = "broker";
+  };
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -144,6 +150,11 @@
     settings.PasswordAuthentication = false;
   };
 
+  programs.ssh = {
+    startAgent = true;
+  };
+
+  # TODO
   services.tailscale.enable = true;
 
   # services.desktopManager.cosmic.enable = true;
@@ -207,7 +218,7 @@
 
   virtualisation.docker.enable = true;
 
-  virtualisation.waydroid.enable = true;
+  # virtualisation.waydroid.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -221,6 +232,8 @@
   };
   services.gnome.gnome-keyring.enable = true;
 
+  services.gvfs.enable = true;
+
   xdg.terminal-exec.enable = true;
 
   xdg.mime.defaultApplications = { };
@@ -228,7 +241,7 @@
   users.users.seolman = {
     isNormalUser = true;
     description = "seolman";
-    # shell = pkgs.zsh;
+    shell = pkgs.fish;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -272,6 +285,13 @@
 
   # programs.waybar.enable = true;
 
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      # wlrobs
+    ];
+  };
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -279,17 +299,17 @@
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  programs.gamescope = {
-    enable = true;
-    capSysNice = true;
-  };
+  # programs.gamescope = {
+  #   enable = true;
+  #   capSysNice = true;
+  # };
 
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-  };
+  # programs.steam = {
+  #   enable = true;
+  #   gamescopeSession.enable = true;
+  # };
 
-  programs.gamemode.enable = true;
+  # programs.gamemode.enable = true;
 
   qt = {
     enable = true;
@@ -311,31 +331,34 @@
     enable = true;
   };
 
-  programs.zsh = {
+  # programs.zsh = {
+  #   enable = true;
+  #   histSize = 10000;
+  #   enableBashCompletion = true;
+  #   syntaxHighlighting.enable = true;
+  #   autosuggestions.enable = true;
+  # };
+
+  programs.fish = {
     enable = true;
-    histSize = 10000;
-    enableBashCompletion = true;
-    syntaxHighlighting.enable = true;
-    autosuggestions.enable = true;
   };
 
-  programs.tmux = {
-    enable = true;
-    plugins = with pkgs; [ ];
-    terminal = "screen-256color";
-    shortcut = "g";
-    historyLimit = 10000;
-    escapeTime = 0;
-    baseIndex = 1;
-    keyMode = "vi";
-    customPaneNavigationAndResize = true;
-    extraConfig = ''
-    '';
-  };
+  # programs.tmux = {
+  #   enable = true;
+  #   plugins = with pkgs; [ ];
+  #   terminal = "screen-256color";
+  #   shortcut = "g";
+  #   historyLimit = 10000;
+  #   escapeTime = 0;
+  #   baseIndex = 1;
+  #   keyMode = "vi";
+  #   customPaneNavigationAndResize = true;
+  #   extraConfig = '''';
+  # };
 
   environment.systemPackages = with pkgs; [
     git
-    tmux
+    # tmux
     neovim
     zellij
     helix
@@ -354,9 +377,9 @@
     clapboard
     gitoxide
     gitu
-    gitui
     lazygit
     github-cli
+    delta
     rsync
     fzf
     skim
@@ -368,6 +391,23 @@
     macchina
     nushell
     tokei
+    clock-rs
+    eza
+    dust
+    hyperfine
+    fselect
+    ripgrep-all
+    just
+    mask
+    presenterm
+    termusic
+    yt-dlp
+    procs
+    pipes-rs
+    tinyxxd
+    hextazy
+    unzip
+    codesnap
 
     gcc
     gnumake
@@ -376,25 +416,33 @@
     clang
     lldb
     cmake
-    valgrind
-    mono
+    # valgrind
+    # mono
     temurin-bin
+    spring-boot-cli
+    gradle
+    # kotlin
     go
     rustc
-    python3Minimal
-    nodejs
+    cargo
+    python313Full
+    nodejs_latest
     typescript
+    deno
     lua
     luajit
     typst
     ansible
     sqlite
-
     nixd
     clang-tools
-    python313Packages.python-lsp-server
+    # python313Packages.python-lsp-server
+    python313Packages.jedi-language-server
+    ruff
     lua-language-server
     typescript-language-server
+    nodePackages_latest.mocha
+    webpack-cli
     gopls
     rust-analyzer
     jdt-language-server
@@ -407,40 +455,39 @@
     superhtml
     yaml-language-server
     taplo
+    eslint
+    nodePackages_latest.prettier
 
     google-chrome
     firefox
     wezterm
     kitty
-    ghostty
+    # ghostty
+    # warp-terminal
     neovide
     vscode
     zed-editor
-    emacs
     # zathura
-    # sioyek
+    sioyek
     fuzzel
-    # anyrun
+    rofi-wayland
     nemo-with-extensions
     nwg-look
     obsidian
-    obs-studio # screen capture not working
-    obs-studio-plugins.wlrobs
-    # showmethekey
-    # vesktop
+    vesktop
     brightnessctl
     libreoffice-qt6
     moonlight-qt
     gimp3
-    blender
-    # grimblast
+    # blender
+    grimblast
     # hyprpicker
     cava
     trashy
     localsend
     # udiskie
     mpv
-    # pass
+    pass
     gnupg
     swww
     # mako
@@ -448,30 +495,41 @@
     # swayosd
     networkmanagerapplet
     xwayland-satellite
-    mangohud
-    protonup-qt
-    lutris
     ironbar
     sxhkd
     wev
     font-manager
     pwvucontrol
     wayland-utils
-    inori
-    tailscale-systray
-    syncthingtray
+    # inori
+    # tailscale-systray
+    # syncthingtray
     gtklock
     wf-recorder
     shared-mime-info
     kalker
+    libqalculate
     qalculate-gtk
     shotcut
     # kmod
     # fanctl
     # fan2go
+    batmon
+    eclipses.eclipse-java
+    # android-studio
+    # cacert
+    gnome-shell
+    kubectl
+    minikube
+    pandoc
+
+    # mangohud
+    # protonup-qt
+    # lutris
 
     adw-gtk3
     adwaita-icon-theme
+    reversal-icon-theme
     whitesur-gtk-theme
     whitesur-icon-theme
     apple-cursor
@@ -480,16 +538,11 @@
   environment.variables = {
     EDITOR = "hx";
     VISUAL = "neovide";
+    GIT_EDITOR = "$EDITOR";
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM = "wayland";
     _ZO_DOCTOR = "0";
     GOPATH = "~/.go";
-    FZF_DEFAULT_OPTS = "
-   		--color=fg:#878580,bg:#100F0F,hl:#CECDC3
-   		--color=fg+:#878580,bg+:#1C1B1A,hl+:#CECDC3
-   		--color=border:#AF3029,header:#CECDC3,gutter:#100F0F
-   		--color=spinner:#24837B,info:#24837B,separator:#1C1B1A
-   		--color=pointer:#AD8301,marker:#AF3029,prompt:#AD8301";
   };
 
   nix.settings.experimental-features = [
