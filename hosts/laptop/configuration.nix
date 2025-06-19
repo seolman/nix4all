@@ -150,9 +150,9 @@
     settings.PasswordAuthentication = false;
   };
 
-  programs.ssh = {
-    startAgent = true;
-  };
+  # programs.ssh = {
+  #   startAgent = true;
+  # };
 
   # TODO
   services.tailscale.enable = true;
@@ -367,6 +367,7 @@
     p7zip
     jq
     poppler
+    poppler-utils
     fd
     ripgrep
     zoxide
@@ -428,7 +429,7 @@
     python313Full
     nodejs_latest
     typescript
-    deno
+    # deno
     lua
     luajit
     typst
@@ -518,7 +519,7 @@
     eclipses.eclipse-java
     # android-studio
     # cacert
-    gnome-shell
+    # gnome-shell
     kubectl
     minikube
     pandoc
