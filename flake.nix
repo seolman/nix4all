@@ -54,7 +54,8 @@
           ];
         };
         nixoswsl = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
+          specialArgs = { inherit inputs; };
           modules = [
             home-manager.nixosModules.home-manager
             nur.modules.nixos.default
