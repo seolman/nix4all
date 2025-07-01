@@ -76,7 +76,8 @@
       turbo = "never";
     };
     charger = {
-      governor = "performance";
+      governor = "powersave";
+      energy_performance_preference = "powersave";
       turbo = "never";
     };
   };
@@ -234,6 +235,10 @@
 
   services.gvfs.enable = true;
 
+  services.postgresql = {
+    enable = true;
+  };
+
   xdg.terminal-exec.enable = true;
 
   xdg.mime.defaultApplications = { };
@@ -298,6 +303,8 @@
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
+
+  programs.xwayland.enable = true;
 
   # programs.gamescope = {
   #   enable = true;
@@ -409,6 +416,8 @@
     hextazy
     unzip
     codesnap
+    gemini-cli
+    awscli2
 
     gcc
     gnumake
@@ -429,12 +438,16 @@
     python313Full
     nodejs_latest
     typescript
-    # deno
+    deno
     lua
     luajit
     typst
     ansible
     sqlite
+    postgresql
+    pgcli
+    mariadb
+    usql
     nixd
     clang-tools
     # python313Packages.python-lsp-server
@@ -517,12 +530,27 @@
     # fan2go
     batmon
     eclipses.eclipse-java
-    # android-studio
+    android-studio
     # cacert
     # gnome-shell
     kubectl
     minikube
     pandoc
+    audacity
+    aseprite
+    blender
+    # lmms
+    famistudio
+    # klystrack # WARN sdl compile error
+    furnace
+    ldtk
+    # pixelorama
+    godot
+    wgpu-native
+    sdl3
+    peazip
+    tic-80
+    waveterm
 
     # mangohud
     # protonup-qt
