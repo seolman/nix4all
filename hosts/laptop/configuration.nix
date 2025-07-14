@@ -3,8 +3,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
@@ -15,6 +14,7 @@
 
   networking.hostName = "nixoslaptop";
   networking.networkmanager.enable = true;
+  networking.extraHosts = '''';
 
   time.timeZone = "Asia/Seoul";
 
@@ -139,10 +139,10 @@
     ];
     fontconfig = {
       enable = true;
-      defaultFonts.serif = [ "NanumSquareRound Bold" ];
-      defaultFonts.sansSerif = [ "NanumSquareRound Bold" ];
-      defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
-      defaultFonts.emoji = [ "Noto Color Emoji" ];
+      defaultFonts.serif = ["NanumSquareRound Bold"];
+      defaultFonts.sansSerif = ["NanumSquareRound Bold"];
+      defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
+      defaultFonts.emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -173,14 +173,14 @@
     enable = true;
     keyboards."main" = {
       config = ''
-        				(defsrc
-        					caps
-        					lctl lmet lalt)
-        				(defalias
-        					cap (tap-hold 100 100 esc lctl))
-        				(deflayer main
-        					lctl
-        					caps lalt lmet)'';
+        (defsrc
+        	caps
+        	lctl lmet lalt)
+        (defalias
+        	cap (tap-hold 100 100 esc lctl))
+        (deflayer main
+        	lctl
+        	caps lalt lmet)'';
       devices = [
         "dev/input/by-path/platform-i8042-serio-0-event-kbd"
       ];
@@ -194,8 +194,8 @@
 
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.flatpak ];
+    wantedBy = ["multi-user.target"];
+    path = [pkgs.flatpak];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
@@ -212,7 +212,7 @@
   virtualisation.libvirtd = {
     enable = true;
     nss.enable = true;
-    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+    qemu.vhostUserPackages = with pkgs; [virtiofsd];
     qemu.swtpm.enable = true;
   };
   programs.virt-manager.enable = true;
@@ -241,7 +241,7 @@
 
   xdg.terminal-exec.enable = true;
 
-  xdg.mime.defaultApplications = { };
+  xdg.mime.defaultApplications = {};
 
   users.users.seolman = {
     isNormalUser = true;
@@ -253,11 +253,11 @@
       "docker"
       "libvirtd"
     ];
-    packages = with pkgs; [ ];
+    packages = with pkgs; [];
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       "seolman" = import ./home.nix;
     };
@@ -302,7 +302,7 @@
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
 
   programs.xwayland.enable = true;
 
@@ -326,7 +326,7 @@
 
   programs.starship = {
     enable = true;
-    presets = [ "plain-text-symbols" ];
+    presets = ["plain-text-symbols"];
   };
 
   programs.fzf = {
@@ -364,8 +364,9 @@
   # };
 
   environment.systemPackages = with pkgs; [
+    vim
     git
-    # tmux
+    tmux
     neovim
     zellij
     helix
@@ -418,6 +419,9 @@
     codesnap
     gemini-cli
     awscli2
+    google-cloud-sdk
+    github-mcp-server
+    turso-cli
 
     gcc
     gnumake
@@ -427,18 +431,20 @@
     lldb
     cmake
     # valgrind
-    # mono
+    mono
     temurin-bin
     spring-boot-cli
     gradle
-    # kotlin
+    kotlin
     go
     rustc
     cargo
     python313Full
+    uv
     nodejs_latest
     typescript
     deno
+    bun
     lua
     luajit
     typst
@@ -449,6 +455,8 @@
     mariadb
     usql
     nixd
+    nil
+    alejandra
     clang-tools
     # python313Packages.python-lsp-server
     python313Packages.jedi-language-server
@@ -471,6 +479,9 @@
     taplo
     eslint
     nodePackages_latest.prettier
+    # docker-language-server
+    dockerfile-language-server-nodejs
+    docker-compose-language-service
 
     google-chrome
     firefox
@@ -535,6 +546,7 @@
     # gnome-shell
     kubectl
     minikube
+    helm
     pandoc
     audacity
     aseprite
@@ -551,6 +563,7 @@
     peazip
     tic-80
     waveterm
+    figma-linux
 
     # mangohud
     # protonup-qt
@@ -571,7 +584,7 @@
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM = "wayland";
     _ZO_DOCTOR = "0";
-    GOPATH = "~/.go";
+    GOPATH = "/home/seolman/.go";
   };
 
   nix.settings.experimental-features = [
