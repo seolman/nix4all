@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
@@ -14,7 +15,9 @@
 
   networking.hostName = "nixoslaptop";
   networking.networkmanager.enable = true;
-  networking.extraHosts = '''';
+  networking.extraHosts = ''
+    192.168.8.101  gitea.local
+  '';
 
   time.timeZone = "Asia/Seoul";
 
@@ -139,10 +142,10 @@
     ];
     fontconfig = {
       enable = true;
-      defaultFonts.serif = ["NanumSquareRound Bold"];
-      defaultFonts.sansSerif = ["NanumSquareRound Bold"];
-      defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
-      defaultFonts.emoji = ["Noto Color Emoji"];
+      defaultFonts.serif = [ "NanumSquareRound Bold" ];
+      defaultFonts.sansSerif = [ "NanumSquareRound Bold" ];
+      defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
+      defaultFonts.emoji = [ "Noto Color Emoji" ];
     };
   };
 
@@ -194,8 +197,8 @@
 
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
-    wantedBy = ["multi-user.target"];
-    path = [pkgs.flatpak];
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
@@ -212,7 +215,7 @@
   virtualisation.libvirtd = {
     enable = true;
     nss.enable = true;
-    qemu.vhostUserPackages = with pkgs; [virtiofsd];
+    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
     qemu.swtpm.enable = true;
   };
   programs.virt-manager.enable = true;
@@ -241,7 +244,7 @@
 
   xdg.terminal-exec.enable = true;
 
-  xdg.mime.defaultApplications = {};
+  xdg.mime.defaultApplications = { };
 
   users.users.seolman = {
     isNormalUser = true;
@@ -253,11 +256,11 @@
       "docker"
       "libvirtd"
     ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs; };
     users = {
       "seolman" = import ./home.nix;
     };
@@ -302,7 +305,7 @@
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   programs.xwayland.enable = true;
 
@@ -326,7 +329,7 @@
 
   programs.starship = {
     enable = true;
-    presets = ["plain-text-symbols"];
+    presets = [ "plain-text-symbols" ];
   };
 
   programs.fzf = {
@@ -361,6 +364,11 @@
   #   keyMode = "vi";
   #   customPaneNavigationAndResize = true;
   #   extraConfig = '''';
+  # };
+
+  # programs.direnv = {
+  #   enable = true;
+  #   silent = true;
   # };
 
   environment.systemPackages = with pkgs; [
@@ -422,20 +430,25 @@
     google-cloud-sdk
     github-mcp-server
     turso-cli
+    argocd
+    piano-rs
+    ssh-to-age
+    sops
+    agenix-cli
 
     gcc
     gnumake
-    gdb
-    gtest
+    # gdb
+    # gtest
     clang
-    lldb
+    # lldb
     cmake
     # valgrind
-    mono
-    temurin-bin
-    spring-boot-cli
-    gradle
-    kotlin
+    # mono
+    # temurin-bin
+    # spring-boot-cli
+    # gradle
+    # kotlin
     go
     rustc
     cargo
@@ -463,7 +476,7 @@
     ruff
     lua-language-server
     typescript-language-server
-    nodePackages_latest.mocha
+    # nodePackages_latest.mocha
     webpack-cli
     gopls
     rust-analyzer
@@ -474,46 +487,46 @@
     sqls
     ansible-language-server
     vscode-langservers-extracted
+    tailwindcss-language-server
     superhtml
     yaml-language-server
     taplo
-    eslint
-    nodePackages_latest.prettier
+    # eslint
+    # nodePackages_latest.prettier
     # docker-language-server
     dockerfile-language-server-nodejs
     docker-compose-language-service
 
     google-chrome
     firefox
-    wezterm
+    # wezterm
     kitty
-    # ghostty
-    # warp-terminal
-    neovide
+    ghostty
+    # neovide
     vscode
-    zed-editor
+    # zed-editor
     # zathura
     sioyek
     fuzzel
-    rofi-wayland
+    # rofi-wayland
     nemo-with-extensions
     nwg-look
     obsidian
-    vesktop
+    # vesktop
     brightnessctl
     libreoffice-qt6
-    moonlight-qt
-    gimp3
+    # moonlight-qt
+    # gimp3
     # blender
-    grimblast
+    # grimblast
     # hyprpicker
     cava
     trashy
     localsend
     # udiskie
     mpv
-    pass
-    gnupg
+    # pass
+    # gnupg
     swww
     # mako
     # swaynotificationcenter
@@ -522,7 +535,7 @@
     xwayland-satellite
     ironbar
     sxhkd
-    wev
+    # wev
     font-manager
     pwvucontrol
     wayland-utils
@@ -530,40 +543,40 @@
     # tailscale-systray
     # syncthingtray
     gtklock
-    wf-recorder
-    shared-mime-info
+    # wf-recorder
     kalker
-    libqalculate
-    qalculate-gtk
-    shotcut
+    # libqalculate
+    # qalculate-gtk
+    # shotcut
     # kmod
     # fanctl
     # fan2go
     batmon
-    eclipses.eclipse-java
-    android-studio
+    # eclipses.eclipse-java
+    # android-studio
     # cacert
     # gnome-shell
     kubectl
-    minikube
-    helm
+    # minikube
+    kubernetes-helm
     pandoc
-    audacity
-    aseprite
-    blender
+    # audacity
+    # aseprite
+    # blender
     # lmms
-    famistudio
+    # famistudio
     # klystrack # WARN sdl compile error
-    furnace
-    ldtk
+    # furnace
+    # ldtk
     # pixelorama
-    godot
-    wgpu-native
-    sdl3
+    # godot
+    # wgpu-native
+    # sdl3
     peazip
-    tic-80
-    waveterm
-    figma-linux
+    # tic-80
+    # waveterm
+    # figma-linux
+    # notion-app-enhanced
 
     # mangohud
     # protonup-qt
@@ -572,7 +585,6 @@
     adw-gtk3
     adwaita-icon-theme
     reversal-icon-theme
-    whitesur-gtk-theme
     whitesur-icon-theme
     apple-cursor
   ];
