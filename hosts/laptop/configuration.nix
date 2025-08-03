@@ -3,8 +3,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
@@ -16,7 +15,6 @@
   networking.hostName = "nixoslaptop";
   networking.networkmanager.enable = true;
   networking.extraHosts = ''
-    192.168.8.101  gitea.local
   '';
 
   time.timeZone = "Asia/Seoul";
@@ -142,10 +140,10 @@
     ];
     fontconfig = {
       enable = true;
-      defaultFonts.serif = [ "NanumSquareRound Bold" ];
-      defaultFonts.sansSerif = [ "NanumSquareRound Bold" ];
-      defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
-      defaultFonts.emoji = [ "Noto Color Emoji" ];
+      defaultFonts.serif = ["NanumSquareRound Bold"];
+      defaultFonts.sansSerif = ["NanumSquareRound Bold"];
+      defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
+      defaultFonts.emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -172,6 +170,10 @@
   # services.xserver.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
+  services.udisks2 = {
+    enable = true;
+  };
+
   services.kanata = {
     enable = true;
     keyboards."main" = {
@@ -197,8 +199,8 @@
 
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.flatpak ];
+    wantedBy = ["multi-user.target"];
+    path = [pkgs.flatpak];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
@@ -215,7 +217,7 @@
   virtualisation.libvirtd = {
     enable = true;
     nss.enable = true;
-    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+    qemu.vhostUserPackages = with pkgs; [virtiofsd];
     qemu.swtpm.enable = true;
   };
   programs.virt-manager.enable = true;
@@ -244,7 +246,7 @@
 
   xdg.terminal-exec.enable = true;
 
-  xdg.mime.defaultApplications = { };
+  xdg.mime.defaultApplications = {};
 
   users.users.seolman = {
     isNormalUser = true;
@@ -256,11 +258,11 @@
       "docker"
       "libvirtd"
     ];
-    packages = with pkgs; [ ];
+    packages = with pkgs; [];
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       "seolman" = import ./home.nix;
     };
@@ -305,7 +307,7 @@
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
 
   programs.xwayland.enable = true;
 
@@ -329,7 +331,7 @@
 
   programs.starship = {
     enable = true;
-    presets = [ "plain-text-symbols" ];
+    presets = ["plain-text-symbols"];
   };
 
   programs.fzf = {
@@ -434,7 +436,9 @@
     piano-rs
     ssh-to-age
     sops
+    age
     agenix-cli
+    grex
 
     gcc
     gnumake
@@ -483,6 +487,7 @@
     jdt-language-server
     bash-language-server
     marksman
+    markdown-oxide
     tinymist
     sqls
     ansible-language-server
@@ -491,8 +496,8 @@
     superhtml
     yaml-language-server
     taplo
-    # eslint
-    # nodePackages_latest.prettier
+    eslint
+    prettier
     # docker-language-server
     dockerfile-language-server-nodejs
     docker-compose-language-service
@@ -523,7 +528,7 @@
     cava
     trashy
     localsend
-    # udiskie
+    udiskie
     mpv
     # pass
     # gnupg
@@ -557,8 +562,10 @@
     # cacert
     # gnome-shell
     kubectl
+    kubectx
     # minikube
     kubernetes-helm
+    k9s
     pandoc
     # audacity
     # aseprite
@@ -597,6 +604,7 @@
     QT_QPA_PLATFORM = "wayland";
     _ZO_DOCTOR = "0";
     GOPATH = "/home/seolman/.go";
+    KUBECONFIG = "/home/seolman/.kube/config";
   };
 
   nix.settings.experimental-features = [

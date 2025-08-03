@@ -63,6 +63,14 @@
           ./hosts/wsl/configuration.nix
         ];
       };
+      nixosserver = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs;};
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./hosts/server/configuration.nix
+        ];
+      };
     };
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
   };
