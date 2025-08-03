@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -44,7 +45,7 @@
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -56,6 +57,11 @@
     zellij
     tmux
   ];
+
+  programs.starship = {
+    enable = true;
+    presets = [ "plain-text-symbols" ];
+  };
 
   services.openssh = {
     enable = true;
