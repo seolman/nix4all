@@ -156,8 +156,10 @@
   #   startAgent = true;
   # };
 
-  # TODO
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    extraSetFlags = [ "--accept-routes" ];
+  };
 
   # services.desktopManager.cosmic.enable = true;
   # services.displayManager.cosmic-greeter.enable = true;

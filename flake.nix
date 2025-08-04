@@ -26,52 +26,57 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    nur,
-    nixos-wsl,
-    darwin,
-    stylix,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nur,
+      nixos-wsl,
+      darwin,
+      stylix,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+      };
+    in
+    {
+      nixosConfigurations = {
+        nixoslaptop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            home-manager.nixosModules.home-manager
+            nur.modules.nixos.default
+            stylix.nixosModules.stylix
+            ./hosts/laptop/configuration.nix
+          ];
+        };
+        nixoswsl = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            home-manager.nixosModules.home-manager
+            nur.modules.nixos.default
+            stylix.nixosModules.stylix
+            nixos-wsl.nixosModules.default
+            ./hosts/wsl/configuration.nix
+          ];
+        };
+        nixosserver = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            home-manager.nixosModules.home-manager
+            nur.modules.nixos.default
+            stylix.nixosModules.stylix
+            ./hosts/server/configuration.nix
+          ];
+        };
+      };
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
     };
-  in {
-    nixosConfigurations = {
-      nixoslaptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {inherit inputs;};
-        modules = [
-          home-manager.nixosModules.home-manager
-          nur.modules.nixos.default
-          stylix.nixosModules.stylix
-          ./hosts/laptop/configuration.nix
-        ];
-      };
-      nixoswsl = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {inherit inputs;};
-        modules = [
-          home-manager.nixosModules.home-manager
-          nur.modules.nixos.default
-          stylix.nixosModules.stylix
-          nixos-wsl.nixosModules.default
-          ./hosts/wsl/configuration.nix
-        ];
-      };
-      nixosserver = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {inherit inputs;};
-        modules = [
-          home-manager.nixosModules.home-manager
-          ./hosts/server/configuration.nix
-        ];
-      };
-    };
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
-  };
 }
