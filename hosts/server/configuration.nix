@@ -51,6 +51,8 @@
     neovim
     zellij
     tmux
+    lazygit
+    yazi
   ];
 
   programs.starship = {
