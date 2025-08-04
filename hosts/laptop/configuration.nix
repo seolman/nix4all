@@ -158,7 +158,7 @@
 
   services.tailscale = {
     enable = true;
-    extraSetFlags = [ "--accept-routes" ];
+    extraUpFlags = [ "--accept-routes" ];
   };
 
   # services.desktopManager.cosmic.enable = true;
@@ -548,6 +548,7 @@
     wayland-utils
     # inori
     # tailscale-systray
+    tail-tray
     # syncthingtray
     gtklock
     # wf-recorder
