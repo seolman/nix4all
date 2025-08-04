@@ -82,6 +82,9 @@
 
   services.postgresql = {
     enable = true;
+    settings = { };
+    ensureDatabases = [ ];
+    ensureUsers = [ ];
   };
 
   nix.settings.experimental-features = [
