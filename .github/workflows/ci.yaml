@@ -1,0 +1,10 @@
+name: Dummy Workflow
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print a message
+        run: echo "Hello, world!"
