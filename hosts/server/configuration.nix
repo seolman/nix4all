@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
@@ -43,11 +44,11 @@
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs; };
     users = {
       "seolman" = import ./home.nix;
     };
@@ -67,7 +68,7 @@
 
   programs.starship = {
     enable = true;
-    presets = ["plain-text-symbols"];
+    presets = [ "plain-text-symbols" ];
   };
 
   programs.fzf = {
@@ -92,7 +93,39 @@
     package = pkgs.postgresql_18;
   };
 
+  services.mongodb = {
+    enable = true;
+  };
+
+  services.neo4j = {
+    enable = true;
+  };
+
+  services.elasticsearch = {
+    enable = true;
+  };
+
+  services.apache-kafka = {
+    enable = true;
+  };
+
+  services.rabbitmq = {
+    enable = true;
+  };
+
+  services.minio = {
+    enable = true;
+  };
+
   services.gitea = {
+    enable = true;
+  };
+
+  services.prometheus = {
+    enable = true;
+  };
+
+  services.grafana = {
     enable = true;
   };
 
@@ -100,7 +133,43 @@
     enable = true;
   };
 
+  services.sonarr = {
+    enable = true;
+  };
+
+  services.bazarr = {
+    enable = true;
+  };
+
+  services.radarr = {
+    enable = true;
+  };
+
+  services.lidarr = {
+    enable = true;
+  };
+
+  services.readarr = {
+    enable = true;
+  };
+
+  services.prowlarr = {
+    enable = true;
+  };
+
+  services.syncthing = {
+    enable = true;
+  };
+
+  services.immich = {
+    enable = true;
+  };
+
   services.vaultwarden = {
+    enable = true;
+  };
+
+  services.home-assistant = {
     enable = true;
   };
 
