@@ -34,12 +34,15 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  virtualisation.docker.enable = true;
+
   users.users.seolman = {
     isNormalUser = true;
     description = "seolman";
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     packages = with pkgs; [ ];
   };
@@ -81,7 +84,7 @@
     enable = true;
   };
 
-  services.nginx = {
+  services.traefik = {
     enable = true;
   };
 
@@ -91,6 +94,14 @@
   };
 
   services.gitea = {
+    enable = true;
+  };
+
+  services.jellyfin = {
+    enable = true;
+  };
+
+  services.vaultwarden = {
     enable = true;
   };
 
