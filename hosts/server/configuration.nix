@@ -7,7 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    inputs.home-manager-nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   boot.loader.grub.enable = true;
@@ -56,6 +56,11 @@
   programs.starship = {
     enable = true;
     presets = [ "plain-text-symbols" ];
+  };
+
+  programs.fzf = {
+    fuzzyCompletion = true;
+    keybindings = true;
   };
 
   programs.zoxide = {
