@@ -159,7 +159,7 @@
 
   services.tailscale = {
     enable = true;
-    extraUpFlags = [ "--accept-routes" ];
+    extraUpFlags = ["--accept-routes"];
   };
 
   # services.desktopManager.cosmic.enable = true;

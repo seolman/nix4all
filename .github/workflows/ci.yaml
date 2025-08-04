@@ -1,10 +1,21 @@
-name: Dummy Workflow
+name: CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  build:
+  format:
     runs-on: ubuntu-latest
     steps:
-      - name: Print a message
-        run: echo "Hello, world!"
+      - name: Install nix
+        uses: cachix/install-nix-action@v22
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run format
+        run: |
+          nix-shell -p alejandra --run alejandra --check .

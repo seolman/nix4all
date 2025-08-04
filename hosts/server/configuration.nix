@@ -3,8 +3,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
@@ -44,11 +43,11 @@
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [ ];
+    packages = with pkgs; [];
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       "seolman" = import ./home.nix;
     };
@@ -68,7 +67,7 @@
 
   programs.starship = {
     enable = true;
-    presets = [ "plain-text-symbols" ];
+    presets = ["plain-text-symbols"];
   };
 
   programs.fzf = {
