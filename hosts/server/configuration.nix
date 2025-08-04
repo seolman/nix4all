@@ -90,7 +90,6 @@
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql_18;
   };
 
   services.mongodb = {
@@ -102,10 +101,6 @@
   };
 
   services.elasticsearch = {
-    enable = true;
-  };
-
-  services.apache-kafka = {
     enable = true;
   };
 
@@ -166,10 +161,6 @@
   };
 
   services.vaultwarden = {
-    enable = true;
-  };
-
-  services.home-assistant = {
     enable = true;
   };
 
