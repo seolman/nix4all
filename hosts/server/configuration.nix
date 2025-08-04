@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
+    inputs.sops-nix.nixosModules.sops
   ];
 
   boot.loader.grub.enable = true;
@@ -83,9 +84,10 @@
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_18;
-    settings = { };
-    ensureDatabases = [ ];
-    ensureUsers = [ ];
+  };
+
+  services.gitea = {
+    enable = true;
   };
 
   nix.settings.experimental-features = [

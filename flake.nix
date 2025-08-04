@@ -23,6 +23,10 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
@@ -35,6 +39,7 @@
       nixos-wsl,
       darwin,
       stylix,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -52,6 +57,7 @@
             home-manager.nixosModules.home-manager
             nur.modules.nixos.default
             stylix.nixosModules.stylix
+            sops-nix.nixosModules.sops
             ./hosts/laptop/configuration.nix
           ];
         };
@@ -73,6 +79,7 @@
             home-manager.nixosModules.home-manager
             nur.modules.nixos.default
             stylix.nixosModules.stylix
+            sops-nix.nixosModules.sops
             ./hosts/server/configuration.nix
           ];
         };
