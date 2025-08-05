@@ -91,7 +91,6 @@
     enable = true;
   };
 
-  # TODO
   services.openssh = {
     enable = true;
   };
@@ -103,7 +102,7 @@
       "syncthing.minirack.home" = {
         locations = {
           "/" = {
-            proxyPass = "http://192.168.8.132:8384";
+            proxyPass = "http://localhost:8384";
             proxyWebsockets = true;
           };
         };
@@ -111,7 +110,15 @@
       "immich.minirack.home" = {
         locations = {
           "/" = {
-            proxyPass = "http://192.168.8.132:3000";
+            proxyPass = "http://localhost:2283";
+            proxyWebsockets = true;
+          };
+        };
+      };
+      "qbittorrent.minirack.home" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:8080";
             proxyWebsockets = true;
           };
         };
@@ -119,9 +126,10 @@
     };
   };
 
-  # TODO
+  # TODO initial user and password
   services.postgresql = {
     enable = true;
+    settings.port = 5432;
   };
 
   # TODO
@@ -169,10 +177,25 @@
     enable = true;
   };
 
+  services.qbittorrent = {
+    enable = true;
+    webuiPort = 8080;
+    openFirewall = true;
+  };
+
+  # services.sabnzbd = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
+
   # TODO
   services.jellyfin = {
     enable = true;
     openFirewall = true;
+  };
+
+  services.jellyseerr = {
+    enable = true;
   };
 
   services.sonarr = {
@@ -219,6 +242,7 @@
   services.immich = {
     enable = true;
     host = "0.0.0.0";
+    port = 2283;
     openFirewall = true;
   };
 
