@@ -16,6 +16,9 @@
 
   networking.hostName = "nixosserver";
   networking.networkmanager.enable = true;
+  networking.firewall = {
+    allowedTCPPorts = [ 80 443 ];
+  };
 
   time.timeZone = "Asia/Seoul";
 
