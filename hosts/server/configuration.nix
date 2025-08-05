@@ -35,6 +35,11 @@
 
   virtualisation.docker.enable = true;
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "tjfehdgns@gmail.com";
+  };
+
   users.users.seolman = {
     isNormalUser = true;
     description = "seolman";
@@ -91,6 +96,16 @@
   # TODO
   services.nginx = {
     enable = true;
+    recommendedProxySettings = true;
+    virtualHosts = {
+      "syncthing.minirack.home" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:8384";
+          };
+        };
+      };
+    };
   };
 
   # TODO
@@ -197,10 +212,10 @@
   };
 
   # TODO
-  services.vaultwarden = {
-    enable = true;
-    dbBackend = "postgresql";
-  };
+  # services.vaultwarden = {
+  #   enable = true;
+  #   dbBackend = "postgresql";
+  # };
 
   # TODO
   # services.home-home-assistant = {};
