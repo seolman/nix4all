@@ -42,6 +42,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      # "media"
     ];
     packages = with pkgs; [];
   };
@@ -63,6 +64,7 @@
     tmux
     lazygit
     yazi
+    gemini-cli
   ];
 
   programs.starship = {
@@ -129,6 +131,7 @@
 
   services.jellyfin = {
     enable = true;
+    openFirewall = true;
   };
 
   services.sonarr = {
@@ -181,6 +184,8 @@
   services.vaultwarden = {
     enable = true;
   };
+
+  services.home-home-assistant = {};
 
   nix.settings.experimental-features = [
     "nix-command"
