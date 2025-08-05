@@ -160,6 +160,7 @@
     extraFlags = ["--no-default-folder"];
     overrideDevices = false;
     overrideFolders = false;
+    guiAddress = "0.0.0.0:8384";
     settings = {
       folders = {};
       devices = {};
