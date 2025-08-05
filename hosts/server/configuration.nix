@@ -65,6 +65,8 @@
     lazygit
     yazi
     gemini-cli
+
+    nixd
   ];
 
   programs.starship = {

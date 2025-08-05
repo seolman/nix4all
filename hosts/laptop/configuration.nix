@@ -485,7 +485,7 @@
     mariadb
     usql
     nixd
-    nil
+    # nil
     alejandra
     clang-tools
     # python313Packages.python-lsp-server
