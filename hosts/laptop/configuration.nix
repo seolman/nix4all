@@ -442,6 +442,7 @@
     age
     agenix-cli
     grex
+    immich-cli
 
     gcc
     gnumake
@@ -512,7 +513,7 @@
     ghostty
     # neovide
     vscode
-    # zed-editor
+    zed-editor
     # zathura
     sioyek
     fuzzel
