@@ -158,12 +158,17 @@
   services.syncthing = {
     enable = true;
     extraFlags = ["--no-default-folder"];
+    user = "seolman";
+    group = "users";
+    dataDir = "/home/seolman";
     overrideDevices = false;
     overrideFolders = false;
     guiAddress = "0.0.0.0:8384";
     settings = {
+      devices = {
+        "android-phone" = { id = "LFGCTOR-LOFNQ4J-2IF7Z7X-BJTFAVX-6HXGWHA-VKCYNH3-IROPVDD-53QGQQ5"; };
+      };
       folders = {};
-      devices = {};
     };
   };
 

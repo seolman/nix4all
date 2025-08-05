@@ -212,12 +212,17 @@
   services.syncthing = {
     enable = true;
     extraFlags = ["--no-default-folder"];
+    user = "seolman";
+    group = "users";
+    dataDir = "/home/seolman";
     overrideDevices = false;
     overrideFolders = false;
     guiAddress = "0.0.0.0:8384";
     settings = {
+      devices = {
+        "nixos-server" = { id = "N2LLEHE-JJRO5NT-AZRBVMM-LZXKVWY-V5QXQHO-F27WY65-RTC43U4-4RMBCQW"; };
+      };
       folders = {};
-      devices = {};
     };
   };
 
