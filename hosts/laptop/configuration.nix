@@ -211,10 +211,14 @@
 
   services.syncthing = {
     enable = true;
-    user = "seolman";
-    group = "users";
-    dataDir = "/home/seolman/Documents";
-    configDir = "/home/seolman/.config/syncthing";
+    extraFlags = ["--no-default-folder"];
+    overrideDevices = false;
+    overrideFolders = false;
+    guiAddress = "0.0.0.0:8384";
+    settings = {
+      folders = {};
+      devices = {};
+    };
   };
 
   virtualisation.libvirtd = {
