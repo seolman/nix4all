@@ -200,7 +200,8 @@
     dbBackend = "postgresql";
   };
 
-  services.home-home-assistant = {};
+  # TODO
+  # services.home-home-assistant = {};
 
   nix.settings.experimental-features = [
     "nix-command"
