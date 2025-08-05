@@ -50,7 +50,7 @@
       "networkmanager"
       "wheel"
       "docker"
-      # "media"
+      "media"
     ];
     packages = with pkgs; [];
   };
@@ -119,6 +119,14 @@
         locations = {
           "/" = {
             proxyPass = "http://localhost:8080";
+            proxyWebsockets = true;
+          };
+        };
+      };
+      "jellyfin.minirack.home" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:8096";
             proxyWebsockets = true;
           };
         };
