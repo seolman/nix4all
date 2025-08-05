@@ -25,15 +25,13 @@
     enable = true;
     user = "seolman";
     group = "users";
-    dataDir = "/home/seolman/Documents";
-    configDir = "/home/seolman/.config/syncthing";
+    dataDir = "/home/seolman";
     guiAddress = "0.0.0.0:8384";
     overrideDevices = false;
     overrideFolders = false;
     settings = {
-      devices = {
-        "oracle-instance" = {id = "G4WTCTC-UVQ3R57-KO2HA4K-T5Q6C3N-DELVUP7-LITVG4M-CAQUMBO-QIP4PAI";};
-      };
+      devices = {};
+      folders = {};
     };
   };
 
