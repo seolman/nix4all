@@ -81,54 +81,67 @@
     enable = true;
   };
 
+  # TODO
   services.openssh = {
     enable = true;
   };
 
+  # TODO
   services.traefik = {
     enable = true;
   };
 
+  # TODO
   services.postgresql = {
     enable = true;
   };
 
+  # TODO
   services.mongodb = {
     enable = true;
   };
 
+  # TODO
   services.neo4j = {
     enable = true;
   };
 
+  # TODO
   services.elasticsearch = {
     enable = true;
   };
 
+  # TODO
   services.rabbitmq = {
     enable = true;
   };
 
+  # TODO
   services.minio = {
     enable = true;
   };
 
+  # TODO
   services.gitea = {
     enable = true;
   };
 
+  # TODO
   services.prometheus = {
     enable = true;
   };
 
+  # TODO
   services.grafana = {
     enable = true;
   };
 
+  # TODO
   services.n8n = {
     enable = true;
   };
 
+  # TODO
   services.jellyfin = {
     enable = true;
     openFirewall = true;
@@ -181,8 +194,10 @@
     openFirewall = true;
   };
 
+  # TODO
   services.vaultwarden = {
     enable = true;
+    dbBackend = "postgresql";
   };
 
   services.home-home-assistant = {};
