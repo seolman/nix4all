@@ -17,7 +17,7 @@
   networking.hostName = "nixosserver";
   networking.networkmanager.enable = true;
   networking.firewall = {
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [ 80 443 8384 ];
   };
 
   time.timeZone = "Asia/Seoul";
@@ -96,7 +96,6 @@
     enable = true;
   };
 
-  # TODO
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
@@ -104,7 +103,16 @@
       "syncthing.minirack.home" = {
         locations = {
           "/" = {
-            proxyPass = "http://localhost:8384";
+            proxyPass = "http://192.168.8.132:8384";
+            proxyWebsockets = true;
+          };
+        };
+      };
+      "immich.minirack.home" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://192.168.8.132:3000";
+            proxyWebsockets = true;
           };
         };
       };
