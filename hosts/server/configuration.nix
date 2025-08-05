@@ -89,7 +89,7 @@
   };
 
   # TODO
-  services.traefik = {
+  services.nginx = {
     enable = true;
   };
 
