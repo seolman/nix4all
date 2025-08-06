@@ -17,7 +17,7 @@
   networking.hostName = "nixosserver";
   networking.networkmanager.enable = true;
   networking.firewall = {
-    allowedTCPPorts = [ 80 443 8384 ];
+    allowedTCPPorts = [ 80 443 8384 3000 ];
   };
 
   time.timeZone = "Asia/Seoul";
@@ -35,6 +35,13 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+  systemd.tmpfiles.rules = [
+    "d /data 0775 root root -"
+    "d /data/downloads 0770 qbittorrent media -"
+    "d /data/media 0770 jellyfin media -"
+    "d /data/media/movies 0770 jellyfin media -"
+  ];
 
   virtualisation.docker.enable = true;
 
@@ -54,6 +61,8 @@
     ];
     packages = with pkgs; [];
   };
+
+  users.groups.media = {};
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
@@ -131,6 +140,38 @@
           };
         };
       };
+      "radarr.minirack.home" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:7878";
+            proxyWebsockets = true;
+          };
+        };
+      };
+      "prowlarr.minirack.home" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:9696";
+            proxyWebsockets = true;
+          };
+        };
+      };
+      "gitea.minirack.home" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:3001";
+            proxyWebsockets = true;
+          };
+        };
+      };
+      "grafana.minirack.home" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:3000";
+            proxyWebsockets = true;
+          };
+        };
+      };
     };
   };
 
@@ -168,6 +209,15 @@
   # TODO
   services.gitea = {
     enable = true;
+    lfs.enable = true;
+    dump.enable = true;
+    database = {
+      type = "postgres";
+      host = "192.168.8.132";
+    };
+    settings = {
+      server.HTTP_PORT = 3001;
+    };
   };
 
   # TODO
@@ -178,6 +228,9 @@
   # TODO
   services.grafana = {
     enable = true;
+    settings = {
+      server.http_port = 3000;
+    };
   };
 
   # TODO
@@ -187,6 +240,7 @@
 
   services.qbittorrent = {
     enable = true;
+    group = "media";
     webuiPort = 8080;
     openFirewall = true;
   };
@@ -199,11 +253,28 @@
   # TODO
   services.jellyfin = {
     enable = true;
+    group = "media";
     openFirewall = true;
   };
 
-  services.jellyseerr = {
+  services.flaresolverr = {
     enable = true;
+    openFirewall = true;
+    port = 8191;
+  };
+
+  services.prowlarr = {
+    enable = true;
+    openFirewall = true;
+    settings.server.port = 9696;
+  };
+
+  services.radarr = {
+    enable = true;
+    user = "jellyfin";
+    group = "media";
+    openFirewall = true;
+    settings.server.port = 7878;
   };
 
   services.sonarr = {
@@ -211,10 +282,6 @@
   };
 
   services.bazarr = {
-    enable = true;
-  };
-
-  services.radarr = {
     enable = true;
   };
 
@@ -226,7 +293,7 @@
     enable = true;
   };
 
-  services.prowlarr = {
+  services.jellyseerr = {
     enable = true;
   };
 
