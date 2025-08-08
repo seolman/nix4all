@@ -17,7 +17,7 @@
   networking.hostName = "nixosserver";
   networking.networkmanager.enable = true;
   networking.firewall = {
-    allowedTCPPorts = [ 80 443 8384 3000 ];
+    allowedTCPPorts = [80 443 8384 3000];
   };
 
   time.timeZone = "Asia/Seoul";
@@ -308,7 +308,7 @@
     guiAddress = "0.0.0.0:8384";
     settings = {
       devices = {
-        "android-phone" = { id = "LFGCTOR-LOFNQ4J-2IF7Z7X-BJTFAVX-6HXGWHA-VKCYNH3-IROPVDD-53QGQQ5"; };
+        "android-phone" = {id = "LFGCTOR-LOFNQ4J-2IF7Z7X-BJTFAVX-6HXGWHA-VKCYNH3-IROPVDD-53QGQQ5";};
       };
       folders = {};
     };

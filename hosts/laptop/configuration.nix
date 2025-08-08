@@ -220,7 +220,10 @@
     guiAddress = "0.0.0.0:8384";
     settings = {
       devices = {
-        "nixosserver" = { id = "7R3GJ6N-NT77P74-BV7NVUU-2XHQF5Y-QBK227A-X3SEXQE-PO7WH7C-HAAGKQJ"; name = "nixos-server"; };
+        "nixosserver" = {
+          id = "7R3GJ6N-NT77P74-BV7NVUU-2XHQF5Y-QBK227A-X3SEXQE-PO7WH7C-HAAGKQJ";
+          name = "nixos-server";
+        };
       };
       folders = {};
     };
