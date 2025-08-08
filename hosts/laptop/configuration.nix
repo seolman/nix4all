@@ -252,6 +252,10 @@
 
   services.gvfs.enable = true;
 
+  services.ollama = {
+    enable = true;
+  };
+
   services.postgresql = {
     enable = true;
   };
@@ -452,6 +456,7 @@
     agenix-cli
     grex
     immich-cli
+    opencode
 
     gcc
     gnumake
@@ -514,6 +519,7 @@
     # docker-language-server
     dockerfile-language-server-nodejs
     docker-compose-language-service
+    lsp-ai
 
     google-chrome
     firefox
