@@ -254,6 +254,10 @@
 
   services.ollama = {
     enable = true;
+    acceleration = "rocm";
+    loadModels = [
+      "deepseek-coder-v2:16b"
+    ];
   };
 
   services.postgresql = {
