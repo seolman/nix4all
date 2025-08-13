@@ -4,6 +4,10 @@
   inputs,
   ...
 }: {
+  sops = {
+    defaultSopsFile = ../../secrets.yaml;
+  };
+
   time.timeZone = "Asia/Seoul";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -21,7 +25,13 @@
 
   services.openssh = {
     enable = true;
+    settings.PermitRootLogin = "no";
     settings.PasswordAuthentication = false;
+  };
+
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = ["--accept-routes"];
   };
 
   environment.systemPackages = with pkgs; [

@@ -19,7 +19,9 @@
 
   networking.hostName = "nixoslaptop";
   networking.networkmanager.enable = true;
-  networking.firewall = {};
+  networking.firewall = {
+    # allowedTCPPorts = [];
+  };
 
   i18n.inputMethod = {
     enable = true;
@@ -256,6 +258,10 @@
       "libvirtd"
     ];
     packages = with pkgs; [];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIUrguVrbIcMvN1pSjvRQdQPIUSvYqrEij+bd7NrJZW3 tjfehdgns@gmail.com" # id_ed25519
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJJgwMDEQXpvJN/FAFjeEmYcAxNVb5QEeznHXCHfAPCI tjfehdgns@gmail.com" # secret
+    ];
   };
 
   nixpkgs.config.allowUnfree = true;
