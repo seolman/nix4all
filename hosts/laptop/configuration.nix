@@ -18,8 +18,6 @@
 
   networking.hostName = "nixoslaptop";
   networking.networkmanager.enable = true;
-  networking.extraHosts = ''
-  '';
 
   i18n.inputMethod = {
     enable = true;
@@ -446,6 +444,7 @@
     grex
     immich-cli
     opencode
+    deploy-rs
 
     gcc
     gnumake
@@ -598,7 +597,6 @@
     # protonup-qt
     # lutris
 
-    base16-schemes
     adw-gtk3
     adwaita-icon-theme
     reversal-icon-theme
@@ -606,33 +604,15 @@
     apple-cursor
   ];
 
-  stylix = {
-    enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
-    image = config.lib.stylix.pixel "base01";
-    polarity = "dark";
-  };
-
   environment.variables = {
     EDITOR = "hx";
-    VISUAL = "neovide";
+    VISUAL = "zeditor";
     GIT_EDITOR = "$EDITOR";
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM = "wayland";
     _ZO_DOCTOR = "0";
     GOPATH = "/home/seolman/.go";
     KUBECONFIG = "/home/seolman/.kube/config";
-  };
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
   };
 
   system.stateVersion = "24.11";

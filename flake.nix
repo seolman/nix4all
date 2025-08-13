@@ -71,6 +71,12 @@
         specialArgs = {inherit inputs;};
         modules = [
           home-manager.nixosModules.home-manager
+          # {
+          #   home-manager.useGlobalPkgs = true;
+          #   home-manager.useUserPackages = true;
+          #   home-manager.users.seolman = import ./hosts/laptop/home.nix;
+          #   home-manager.extraSpecialArgs = inputs;
+          # }
           nur.modules.nixos.default
           stylix.nixosModules.stylix
           nixos-wsl.nixosModules.default
@@ -82,6 +88,12 @@
         specialArgs = {inherit inputs;};
         modules = [
           home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.seolman = import ./hosts/server/home.nix;
+            home-manager.extraSpecialArgs = inputs;
+          }
           nur.modules.nixos.default
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
