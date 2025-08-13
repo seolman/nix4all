@@ -24,10 +24,6 @@
     settings.PasswordAuthentication = false;
   };
 
-  services.udisks2 = {
-    enable = true;
-  };
-
   environment.systemPackages = with pkgs; [
     base16-schemes
   ];

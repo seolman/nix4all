@@ -14,8 +14,9 @@
     ./../../modules/profiles/server.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda1";
+  boot.loader.grub.useOSProber = true;
 
   networking.hostName = "nixosserver";
   networking.networkmanager.enable = true;
