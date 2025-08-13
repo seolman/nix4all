@@ -11,6 +11,7 @@
     inputs.sops-nix.nixosModules.sops
 
     ../../modules/profiles/common.nix
+    ../../modules/profiles/desktop.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -18,6 +19,7 @@
 
   networking.hostName = "nixoslaptop";
   networking.networkmanager.enable = true;
+  networking.firewall = {};
 
   i18n.inputMethod = {
     enable = true;
@@ -135,15 +137,6 @@
     };
   };
 
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-  };
-
-  # programs.ssh = {
-  #   startAgent = true;
-  # };
-
   services.tailscale = {
     enable = true;
     extraUpFlags = ["--accept-routes"];
@@ -159,14 +152,6 @@
 
   # services.xserver.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
-
-  services.udisks2 = {
-    enable = true;
-  };
-
-  services.gvfs = {
-    enable = true;
-  };
 
   services.kanata = {
     enable = true;
@@ -339,7 +324,12 @@
     presets = ["plain-text-symbols"];
   };
 
-  programs.fzf = {
+  # programs.fzf = {
+  #   fuzzyCompletion = true;
+  #   keybindings = true;
+  # };
+
+  programs.skim = {
     fuzzyCompletion = true;
     keybindings = true;
   };
@@ -380,7 +370,7 @@
 
   environment.systemPackages = with pkgs; [
     inputs.neovim-overlay.packages.${pkgs.system}.default
-    git
+    # git
     zellij
     helix
     yazi

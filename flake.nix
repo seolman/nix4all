@@ -57,7 +57,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.seolman = import ./hosts/laptop/home.nix;
+            home-manager.users.seolman = import ./modules/users/seolman.nix;
             home-manager.extraSpecialArgs = inputs;
           }
           nur.modules.nixos.default
@@ -74,7 +74,7 @@
           # {
           #   home-manager.useGlobalPkgs = true;
           #   home-manager.useUserPackages = true;
-          #   home-manager.users.seolman = import ./hosts/laptop/home.nix;
+          #   home-manager.users.seolman = import ./modules/users/seolman.nix;
           #   home-manager.extraSpecialArgs = inputs;
           # }
           nur.modules.nixos.default
@@ -91,7 +91,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.seolman = import ./hosts/server/home.nix;
+            home-manager.users.seolman = import ./modules/users/seolman.nix;
             home-manager.extraSpecialArgs = inputs;
           }
           nur.modules.nixos.default

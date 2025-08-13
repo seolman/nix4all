@@ -19,6 +19,15 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+  };
+
+  services.udisks2 = {
+    enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     base16-schemes
   ];

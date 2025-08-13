@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   ...
 }: {
@@ -10,33 +11,17 @@
     inputs.sops-nix.nixosModules.sops
 
     ./../../modules/profiles/common.nix
+    ./../../modules/profiles/server.nix
   ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixosserver";
   networking.networkmanager.enable = true;
   networking.firewall = {
     allowedTCPPorts = [80 443 8384 3000];
   };
-
-  # time.timeZone = "Asia/Seoul";
-
-  # i18n.defaultLocale = "en_US.UTF-8";
-
-  # i18n.extraLocaleSettings = {
-  #   LC_ADDRESS = "en_US.UTF-8";
-  #   LC_IDENTIFICATION = "en_US.UTF-8";
-  #   LC_MEASUREMENT = "en_US.UTF-8";
-  #   LC_MONETARY = "en_US.UTF-8";
-  #   LC_NAME = "en_US.UTF-8";
-  #   LC_NUMERIC = "en_US.UTF-8";
-  #   LC_PAPER = "en_US.UTF-8";
-  #   LC_TELEPHONE = "en_US.UTF-8";
-  #   LC_TIME = "en_US.UTF-8";
-  # };
 
   systemd.tmpfiles.rules = [
     "d /data 0775 root root -"
@@ -324,7 +309,6 @@
 
   # TODO
   # services.home-home-assistant = {};
-
 
   system.stateVersion = "25.05";
 }
