@@ -6,7 +6,7 @@
   ...
 }: {
   services.tailscale = {
-    authKeyFile = config.sops.secrets.authKeyFile.path;
+    # authKeyFile = config.sops.secrets.authKeyFile.path;
     extraSetFlags = ["--advertise-exit-node"];
   };
 }

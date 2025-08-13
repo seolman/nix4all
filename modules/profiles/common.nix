@@ -4,10 +4,12 @@
   inputs,
   ...
 }: {
-  sops = {
-    defaultSopsFile = ../../secrets.yaml;
-    secrets.tailscale.authKeyFile = {};
-  };
+  # sops = {
+  #   defaultSopsFile = ../../secrets.yaml;
+  #   secrets.tailscale = {
+  #     sopsFile = ../../secrets.yaml;
+  #   };
+  # };
 
   time.timeZone = "Asia/Seoul";
 
