@@ -4,12 +4,14 @@
   inputs,
   ...
 }: {
-  # sops = {
-  #   defaultSopsFile = ../../secrets.yaml;
-  #   secrets.tailscale = {
-  #     sopsFile = ../../secrets.yaml;
-  #   };
-  # };
+  # TODO: fix secret key
+  sops = {
+    defaultSopsFile = ../../secrets.yaml;
+    age.sshKeyPaths = [
+      "/home/seolman/.ssh/secret"
+    ];
+    secrets."tailscale/authKeyFile" = {};
+  };
 
   time.timeZone = "Asia/Seoul";
 
@@ -32,14 +34,8 @@
     settings.PasswordAuthentication = false;
   };
 
-  services.tailscale = {
-    enable = true;
-    extraUpFlags = ["--accept-routes"];
-  };
-
   environment.systemPackages = with pkgs; [
     base16-schemes
-    tailscale
   ];
 
   stylix = {

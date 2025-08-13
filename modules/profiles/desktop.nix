@@ -11,4 +11,9 @@
   services.gvfs = {
     enable = true;
   };
+
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = ["--accept-routes"];
+  };
 }
