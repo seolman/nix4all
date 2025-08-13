@@ -28,6 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = {
@@ -39,6 +40,7 @@
     darwin,
     stylix,
     sops-nix,
+    neovim-overlay,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -52,6 +54,12 @@
         specialArgs = {inherit inputs;};
         modules = [
           home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.seolman = import ./hosts/laptop/home.nix;
+            home-manager.extraSpecialArgs = inputs;
+          }
           nur.modules.nixos.default
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops

@@ -177,6 +177,10 @@
     enable = true;
   };
 
+  services.gvfs = {
+    enable = true;
+  };
+
   services.kanata = {
     enable = true;
     keyboards."main" = {
@@ -253,8 +257,6 @@
   };
   services.gnome.gnome-keyring.enable = true;
 
-  services.gvfs.enable = true;
-
   services.ollama = {
     enable = true;
     acceleration = "rocm";
@@ -282,13 +284,6 @@
       "libvirtd"
     ];
     packages = with pkgs; [];
-  };
-
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "seolman" = import ./home.nix;
-    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -346,11 +341,11 @@
 
   # programs.gamemode.enable = true;
 
-  qt = {
-    enable = true;
-    style = "adwaita-dark";
-    platformTheme = "qt5ct";
-  };
+  # qt = {
+  #   enable = true;
+  #   style = "adwaita-dark";
+  #   platformTheme = "qt5ct";
+  # };
 
   programs.starship = {
     enable = true;
@@ -397,10 +392,8 @@
   # };
 
   environment.systemPackages = with pkgs; [
-    vim
+    inputs.neovim-overlay.packages.${pkgs.system}.default
     git
-    tmux
-    neovim
     zellij
     helix
     yazi
@@ -530,7 +523,7 @@
 
     google-chrome
     firefox
-    # wezterm
+    wezterm
     kitty
     ghostty
     # neovide
@@ -616,12 +609,20 @@
     # protonup-qt
     # lutris
 
+    base16-schemes
     adw-gtk3
     adwaita-icon-theme
     reversal-icon-theme
     whitesur-icon-theme
     apple-cursor
   ];
+
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
+    image = config.lib.stylix.pixel "base01";
+    polarity = "dark";
+  };
 
   environment.variables = {
     EDITOR = "hx";
