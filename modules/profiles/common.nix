@@ -6,6 +6,7 @@
 }: {
   sops = {
     defaultSopsFile = ../../secrets.yaml;
+    secrets.tailscale.authKeyFile = {};
   };
 
   time.timeZone = "Asia/Seoul";
