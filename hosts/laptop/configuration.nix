@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
@@ -132,16 +133,16 @@
     ];
     fontconfig = {
       enable = true;
-      defaultFonts.serif = ["NanumSquareRound Bold"];
-      defaultFonts.sansSerif = ["NanumSquareRound Bold"];
-      defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
-      defaultFonts.emoji = ["Noto Color Emoji"];
+      defaultFonts.serif = [ "NanumSquareRound Bold" ];
+      defaultFonts.sansSerif = [ "NanumSquareRound Bold" ];
+      defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
+      defaultFonts.emoji = [ "Noto Color Emoji" ];
     };
   };
 
   services.tailscale = {
     enable = true;
-    extraUpFlags = ["--accept-routes"];
+    extraUpFlags = [ "--accept-routes" ];
   };
 
   # services.desktopManager.cosmic.enable = true;
@@ -180,8 +181,8 @@
 
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
-    wantedBy = ["multi-user.target"];
-    path = [pkgs.flatpak];
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
@@ -189,7 +190,7 @@
 
   services.syncthing = {
     enable = true;
-    extraFlags = ["--no-default-folder"];
+    extraFlags = [ "--no-default-folder" ];
     user = "seolman";
     group = "users";
     dataDir = "/home/seolman";
@@ -203,14 +204,14 @@
           name = "nixos-server";
         };
       };
-      folders = {};
+      folders = { };
     };
   };
 
   virtualisation.libvirtd = {
     enable = true;
     nss.enable = true;
-    qemu.vhostUserPackages = with pkgs; [virtiofsd];
+    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
     qemu.swtpm.enable = true;
   };
   programs.virt-manager.enable = true;
@@ -245,7 +246,7 @@
 
   xdg.terminal-exec.enable = true;
 
-  xdg.mime.defaultApplications = {};
+  xdg.mime.defaultApplications = { };
 
   users.users.seolman = {
     isNormalUser = true;
@@ -257,7 +258,7 @@
       "docker"
       "libvirtd"
     ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIUrguVrbIcMvN1pSjvRQdQPIUSvYqrEij+bd7NrJZW3 tjfehdgns@gmail.com" # id_ed25519
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJJgwMDEQXpvJN/FAFjeEmYcAxNVb5QEeznHXCHfAPCI tjfehdgns@gmail.com" # secret
@@ -303,7 +304,7 @@
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   programs.xwayland.enable = true;
 
@@ -327,7 +328,7 @@
 
   programs.starship = {
     enable = true;
-    presets = ["plain-text-symbols"];
+    presets = [ "plain-text-symbols" ];
   };
 
   # programs.fzf = {
@@ -475,7 +476,8 @@
     usql
     nixd
     # nil
-    alejandra
+    # alejandra
+    nixfmt-tree
     clang-tools
     # python313Packages.python-lsp-server
     python313Packages.jedi-language-server

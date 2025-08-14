@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
@@ -21,7 +22,12 @@
   networking.hostName = "nixosserver";
   networking.networkmanager.enable = true;
   networking.firewall = {
-    allowedTCPPorts = [80 443 8384 3000];
+    allowedTCPPorts = [
+      80
+      443
+      8384
+      3000
+    ];
   };
 
   systemd.tmpfiles.rules = [
@@ -47,10 +53,10 @@
       "docker"
       "media"
     ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
-  users.groups.media = {};
+  users.groups.media = { };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -69,7 +75,7 @@
 
   programs.starship = {
     enable = true;
-    presets = ["plain-text-symbols"];
+    presets = [ "plain-text-symbols" ];
   };
 
   programs.fzf = {
@@ -280,7 +286,7 @@
 
   services.syncthing = {
     enable = true;
-    extraFlags = ["--no-default-folder"];
+    extraFlags = [ "--no-default-folder" ];
     user = "seolman";
     group = "users";
     dataDir = "/home/seolman";
@@ -289,9 +295,11 @@
     guiAddress = "0.0.0.0:8384";
     settings = {
       devices = {
-        "android-phone" = {id = "LFGCTOR-LOFNQ4J-2IF7Z7X-BJTFAVX-6HXGWHA-VKCYNH3-IROPVDD-53QGQQ5";};
+        "android-phone" = {
+          id = "LFGCTOR-LOFNQ4J-2IF7Z7X-BJTFAVX-6HXGWHA-VKCYNH3-IROPVDD-53QGQQ5";
+        };
       };
-      folders = {};
+      folders = { };
     };
   };
 

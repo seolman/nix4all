@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   services.udisks2 = {
     enable = true;
   };
@@ -14,16 +15,16 @@
 
   services.tailscale = {
     enable = true;
-    extraUpFlags = ["--accept-routes"];
+    extraUpFlags = [ "--accept-routes" ];
   };
 
   environment.systemPackages = with pkgs; [
     alacritty
+    rio
     wezterm
     kitty
+    ghostty
     foot
     contour
-    hyper
-    tabby
   ];
 }

@@ -16,6 +16,3 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Run alejandra
-        run: nix run github:kamadorueda/alejandra -- --check .

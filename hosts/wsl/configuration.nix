@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.nixos-wsl.nixosModules.default
@@ -16,7 +17,7 @@
 
   services.openssh = {
     enable = true;
-    ports = [22];
+    ports = [ 22 ];
   };
 
   programs.ssh.startAgent = true;
@@ -30,8 +31,8 @@
     overrideDevices = false;
     overrideFolders = false;
     settings = {
-      devices = {};
-      folders = {};
+      devices = { };
+      folders = { };
     };
   };
 
@@ -58,7 +59,7 @@
 
   programs.starship = {
     enable = true;
-    presets = ["plain-text-symbols"];
+    presets = [ "plain-text-symbols" ];
   };
 
   programs.fish = {
@@ -153,7 +154,10 @@
     ];
   };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   wsl = {
     enable = true;

@@ -4,17 +4,18 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   home.username = "seolman";
   home.homeDirectory = "/home/seolman";
 
   home.stateVersion = "24.11";
 
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ ];
 
-  home.file = {};
+  home.file = { };
 
-  home.sessionVariables = {};
+  home.sessionVariables = { };
 
   programs.home-manager.enable = true;
 

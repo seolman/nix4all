@@ -4,6 +4,7 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   programs.niri.enable = true;
 }

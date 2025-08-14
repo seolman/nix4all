@@ -3,14 +3,15 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   # TODO: fix secret key
   sops = {
     defaultSopsFile = ../../secrets.yaml;
     age.sshKeyPaths = [
       "/home/seolman/.ssh/secret"
     ];
-    secrets."tailscale/authKeyFile" = {};
+    secrets."tailscale/authKeyFile" = { };
   };
 
   time.timeZone = "Asia/Seoul";
