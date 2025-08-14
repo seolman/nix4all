@@ -9,7 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
-    inputs.sops-nix.nixosModules.sops
+    # inputs.sops-nix.nixosModules.sops
 
     ../../modules/profiles/common.nix
     ../../modules/profiles/desktop.nix
@@ -376,7 +376,7 @@
   # };
 
   environment.systemPackages = with pkgs; [
-    inputs.neovim-overlay.packages.${pkgs.system}.default
+    # inputs.neovim-overlay.packages.${pkgs.system}.default
     # git
     zellij
     helix
@@ -443,30 +443,12 @@
     opencode
     deploy-rs
 
-    gcc
-    gnumake
-    # gdb
-    # gtest
-    clang
-    # lldb
-    cmake
     # valgrind
     # mono
     # temurin-bin
     # spring-boot-cli
     # gradle
     # kotlin
-    go
-    rustc
-    cargo
-    python313Full
-    uv
-    nodejs_latest
-    typescript
-    deno
-    bun
-    lua
-    luajit
     typst
     ansible
     sqlite
@@ -474,48 +456,19 @@
     pgcli
     mariadb
     usql
-    nixd
-    # nil
-    # alejandra
-    nixfmt-tree
-    clang-tools
-    # python313Packages.python-lsp-server
-    python313Packages.jedi-language-server
-    ruff
-    lua-language-server
-    typescript-language-server
-    typescript-go
-    # nodePackages_latest.mocha
-    webpack-cli
-    gopls
-    rust-analyzer
     jdt-language-server
     bash-language-server
-    marksman
-    markdown-oxide
     tinymist
     sqls
     ansible-language-server
-    vscode-langservers-extracted
-    tailwindcss-language-server
-    superhtml
     yaml-language-server
     taplo
-    eslint
-    prettier
     # docker-language-server
     dockerfile-language-server-nodejs
     docker-compose-language-service
     lsp-ai
 
-    google-chrome
-    firefox
-    wezterm
-    kitty
-    ghostty
     # neovide
-    vscode
-    zed-editor
     # zathura
     sioyek
     fuzzel
@@ -564,8 +517,6 @@
     # fanctl
     # fan2go
     batmon
-    # eclipses.eclipse-java
-    # android-studio
     # cacert
     # gnome-shell
     kubectl
@@ -575,32 +526,21 @@
     k9s
     pandoc
     # audacity
-    # aseprite
-    # blender
     # lmms
     # famistudio
     # klystrack # WARN sdl compile error
     # furnace
     # ldtk
     # pixelorama
-    # godot
     # wgpu-native
     # sdl3
     peazip
-    # tic-80
-    # waveterm
     # figma-linux
     # notion-app-enhanced
 
     # mangohud
     # protonup-qt
     # lutris
-
-    adw-gtk3
-    adwaita-icon-theme
-    reversal-icon-theme
-    whitesur-icon-theme
-    apple-cursor
   ];
 
   environment.variables = {
