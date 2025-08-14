@@ -43,6 +43,14 @@
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
     image = config.lib.stylix.pixel "base00";
+    fonts = {
+      sizes = {
+        applications = 12;
+        desktop = 10;
+        popups = 10;
+        terminal = 14;
+      };
+    };
     polarity = "dark";
   };
 

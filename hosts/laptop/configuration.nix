@@ -484,6 +484,7 @@
     ruff
     lua-language-server
     typescript-language-server
+    typescript-go
     # nodePackages_latest.mocha
     webpack-cli
     gopls
