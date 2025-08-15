@@ -94,6 +94,8 @@
         "C-[" = "normal_mode";
       };
       keys.normal = {
+        "C-u" = ["page_cursor_half_up" "align_view_center"];
+        "C-p" = ["page_cursor_half_down" "align_view_center"];
         tab = "expand_selection";
         S-tab = "shrink_selection";
       };

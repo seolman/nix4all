@@ -5,6 +5,35 @@
   ...
 }:
 {
+  i18n.inputMethod = {
+    enable = true;
+    type = "kime";
+    kime = {
+      iconColor = "White";
+      daemonModules = [
+        "Xim"
+        "Wayland"
+      ];
+      extraConfig = ''
+        engine:
+          global_hotkeys:
+            S-Space:
+              behavior: !Toggle
+              - Hangul
+              - Latin
+              result: Consume
+            Esc:
+              behavior: !Switch Latin
+              result: Bypass'';
+    };
+    # type = "fcitx5";
+    # fcitx5.addons = with pkgs; [
+    # 	fcitx5-mozc
+    # 	fcitx5-gtk
+    # 	fcitx5-hangul
+    # ];
+  };
+
   services.udisks2 = {
     enable = true;
   };
