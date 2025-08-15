@@ -162,15 +162,15 @@
     };
   };
 
-  # TODO
-  services.mongodb = {
-    enable = true;
-  };
+  # # TODO
+  # services.mongodb = {
+  #   enable = true;
+  # };
 
-  # TODO
-  services.neo4j = {
-    enable = true;
-  };
+  # # TODO
+  # services.neo4j = {
+  #   enable = true;
+  # };
 
   # TODO
   services.elasticsearch = {
