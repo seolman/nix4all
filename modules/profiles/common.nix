@@ -12,6 +12,45 @@
       "/home/seolman/.ssh/secret"
     ];
     secrets."tailscale/authKeyFile" = { };
+    secrets."syncthing/nixosServer" = { };
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [];
+    cups-pdf.enable = true;
+  };
+
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
+  };
+
+  services.syncthing = {
+    enable = true;
+    extraFlags = [ "--no-default-folder" ];
+    user = "seolman";
+    group = "users";
+    dataDir = "/home/seolman";
+    overrideDevices = false;
+    overrideFolders = false;
+    guiAddress = "0.0.0.0:8384";
   };
 
   time.timeZone = "Asia/Seoul";

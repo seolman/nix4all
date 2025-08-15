@@ -42,6 +42,15 @@
     enable = true;
   };
 
+  services.blueman.enable = true;
+
+  services.dbus = {
+    enable = true;
+    implementation = "broker";
+  };
+
+  security.polkit.enable = true;
+
   services.tailscale = {
     enable = true;
     extraUpFlags = [ "--accept-routes" ];

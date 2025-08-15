@@ -8,9 +8,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.home-manager
-    # inputs.sops-nix.nixosModules.sops
-
     ../../modules/profiles/common.nix
     ../../modules/profiles/desktop.nix
   ];
@@ -28,11 +25,6 @@
     enable = true;
     powertop.enable = true;
   };
-  # hardware.fancontrol = {
-  #   enable = true;
-  #   config = '''';
-  # };
-  # programs.coolercontrol.enable = true;
   services.auto-cpufreq.enable = true;
   services.auto-cpufreq.settings = {
     battery = {
@@ -46,50 +38,8 @@
       turbo = "never";
     };
   };
-  # services.thermald = {
-  #   enable = true;
-  #   ignoreCpuidCheck = true;
-  # };
   services.upower.enable = true;
 
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      gutenprint
-      hplip
-      splix
-    ];
-    cups-pdf.enable = true;
-  };
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Experimental = true;
-      };
-    };
-  };
-  services.blueman.enable = true;
-
-  services.dbus = {
-    enable = true;
-    implementation = "broker";
-  };
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    audio.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-    wireplumber.enable = true;
-  };
-
-  security.polkit.enable = true;
   security.soteria.enable = true;
 
   # services.desktopManager.cosmic.enable = true;
@@ -147,7 +97,7 @@
     settings = {
       devices = {
         "nixosserver" = {
-          id = "7R3GJ6N-NT77P74-BV7NVUU-2XHQF5Y-QBK227A-X3SEXQE-PO7WH7C-HAAGKQJ";
+          id = config.sops.secrets."syncthing/nixosServer".path;
           name = "nixos-server";
         };
       };
