@@ -86,14 +86,6 @@
   };
 
   services.syncthing = {
-    enable = true;
-    extraFlags = [ "--no-default-folder" ];
-    user = "seolman";
-    group = "users";
-    dataDir = "/home/seolman";
-    overrideDevices = false;
-    overrideFolders = false;
-    guiAddress = "0.0.0.0:8384";
     settings = {
       devices = {
         "nixosserver" = {
@@ -104,16 +96,6 @@
       folders = { };
     };
   };
-
-  virtualisation.libvirtd = {
-    enable = true;
-    nss.enable = true;
-    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
-    qemu.swtpm.enable = true;
-  };
-  programs.virt-manager.enable = true;
-
-  virtualisation.docker.enable = true;
 
   # virtualisation.waydroid.enable = true;
 
@@ -128,14 +110,6 @@
     ];
   };
   services.gnome.gnome-keyring.enable = true;
-
-  services.ollama = {
-    enable = true;
-    acceleration = "rocm";
-    loadModels = [
-      "deepseek-coder-v2:16b"
-    ];
-  };
 
   xdg.terminal-exec.enable = true;
 

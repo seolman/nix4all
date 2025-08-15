@@ -13,6 +13,24 @@
     ];
     secrets."tailscale/authKeyFile" = { };
     secrets."syncthing/nixosServer" = { };
+    secrets."mongodb/password" = { };
+    secrets."postgresql/password" = { };
+    secrets."redis/password" = { };
+  };
+
+  time.timeZone = "Asia/Seoul";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
   hardware.bluetooth = {
@@ -24,6 +42,15 @@
       };
     };
   };
+
+  virtualisation.libvirtd = {
+    enable = true;
+    nss.enable = true;
+    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+    qemu.swtpm.enable = true;
+  };
+
+  virtualisation.docker.enable = true;
 
   services.printing = {
     enable = true;
@@ -53,21 +80,6 @@
     guiAddress = "0.0.0.0:8384";
   };
 
-  time.timeZone = "Asia/Seoul";
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "no";
@@ -77,11 +89,44 @@
   services.postgresql = {
     enable = true;
     settings.port = 5432;
+    initialScript = pkgs.writeText "init_db.sql" ''
+      alter user postgres with password '${config.sops.secrets."postgresql/password".path}';
+    '';
+  };
+
+  services.postgresqlBackup = {
+    enable = true;
+    databases = [];
   };
 
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
+    replication.masterPort = 3306;
+    replication.masterPassword = config.sops.secrets."mysql/password".path;
+  };
+
+  services.mysqlBackup = {
+    enable = true;
+    databases = [];
+  };
+
+  # INFO 27017
+  services.mongodb = {
+    enable = true;
+    package = pkgs.mongodb-ce;
+    bind_ip = "0.0.0.0";
+    enableAuth = true;
+    initialRootPasswordFile = config.sops.secrets."mongodb/password".path;
+  };
+
+  services.redis = {
+    servers.dev = {
+      enable = true;
+      port = 6379;
+      openFirewall = true;
+      requirePassFile = config.sops.secrets."redis/password".path;
+    };
   };
 
   environment.systemPackages = with pkgs; [

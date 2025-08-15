@@ -56,6 +56,14 @@
     extraUpFlags = [ "--accept-routes" ];
   };
 
+  services.ollama = {
+    enable = true;
+    acceleration = "rocm";
+    loadModels = [
+      "deepseek-coder-v2:16b"
+    ];
+  };
+
   environment.systemPackages = with pkgs; [
     nixd
     nil
@@ -162,4 +170,6 @@
     whitesur-icon-theme
     apple-cursor
   ];
+
+  programs.virt-manager.enable = true;
 }
