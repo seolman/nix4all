@@ -11,6 +11,7 @@
     age.sshKeyPaths = [
       "/home/seolman/.ssh/secret"
     ];
+    secrets."ssh/ed25519" = { };
     secrets."tailscale/authKeyFile" = { };
     secrets."syncthing/nixosServer" = { };
     secrets."mongodb/password" = { };
@@ -84,6 +85,12 @@
     enable = true;
     settings.PermitRootLogin = "no";
     settings.PasswordAuthentication = false;
+    # hostKeys = [
+    #   {
+    #     type = "ed25519";
+    #     path = config.sops.secrets."ssh/ed25519".path;
+    #   }
+    # ];
   };
 
   services.postgresql = {
@@ -127,6 +134,10 @@
       openFirewall = true;
       requirePassFile = config.sops.secrets."redis/password".path;
     };
+  };
+
+  services.neo4j = {
+    enable = true;
   };
 
   environment.systemPackages = with pkgs; [
