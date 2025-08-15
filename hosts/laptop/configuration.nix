@@ -477,9 +477,9 @@
   ];
 
   environment.variables = {
-    EDITOR = "hx";
+    # EDITOR = "hx";
     VISUAL = "zeditor";
-    GIT_EDITOR = "$EDITOR";
+    # GIT_EDITOR = "$EDITOR";
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM = "wayland";
     _ZO_DOCTOR = "0";

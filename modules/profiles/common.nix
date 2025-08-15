@@ -46,12 +46,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    noto-fonts-emoji
-    nerd-fonts.jetbrains-mono
-    nanum
     base16-schemes
 
     zellij
@@ -64,14 +58,22 @@
     _ZO_DOCTOR = "0";
   };
 
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-emoji
+    nerd-fonts.jetbrains-mono
+    nanum
+  ];
 
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
     image = config.lib.stylix.pixel "base00";
     fonts = {
-      serif.name = "NanumSquareRound";
-      sansSerif.name = "NanumSquareRound";
+      serif.name = "NanumSquareRound Bold";
+      sansSerif.name = "NanumSquareRound Bold";
       monospace.name = "JetBrainsMono Nerd Font";
       emoji.name = "Noto Color Emoji";
       sizes = {
