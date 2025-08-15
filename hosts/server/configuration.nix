@@ -316,10 +316,11 @@
 
   # services.zigbee2mqtt = {};
 
-  services.nextcloud = {
-    enable = true;
-    config.dbtype = "pgsql";
-  };
+  # TODO hostname
+  # services.nextcloud = {
+  #   enable = true;
+  #   config.dbtype = "pgsql";
+  # };
 
   # TODO docmost not in nixpkgs
 
