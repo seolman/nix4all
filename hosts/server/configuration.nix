@@ -162,12 +162,6 @@
     };
   };
 
-  # TODO initial user and password
-  services.postgresql = {
-    enable = true;
-    settings.port = 5432;
-  };
-
   # TODO
   services.mongodb = {
     enable = true;

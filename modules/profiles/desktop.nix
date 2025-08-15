@@ -47,31 +47,56 @@
 
     gcc
     gnumake
-    # gdb
+    gdb
     # gtest
     clang
-    # lldb
+    lldb
     cmake
     clang-tools
 
-    rustc
-    cargo
-    # rust-analyzer
+    temurin-bin
+    spring-boot-cli
+    jdt-language-server
 
     lua
     luajit
     lua-language-server
 
+    rustc
+    cargo
+    # ERROR: different hash
+    # rust-analyzer
+
     marksman
     markdown-oxide
+
+    typst
+    tinymist
+
+    ansible
+    ansible-language-server
+
+    yaml-language-server
+    bash-language-server
+    taplo
+
+    sqlite
+    usql
+    sqls
+
+    # valgrind
+    # mono
+    # gradle
+    # kotlin
+    # docker-language-server
+    dockerfile-language-server-nodejs
+    docker-compose-language-service
+    lsp-ai
 
     kitty
     ghostty
     wezterm
     alacritty
-    rio
-    foot
-    contour
 
     google-chrome
     firefox
@@ -85,6 +110,13 @@
     aseprite
     blender
     godot
+    audacity
+    # lmms
+    # famistudio
+    # klystrack # WARN sdl compile error
+    # furnace
+    # ldtk
+    # pixelorama
 
     adw-gtk3
     adwaita-icon-theme

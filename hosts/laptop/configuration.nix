@@ -121,30 +121,6 @@
   security.polkit.enable = true;
   security.soteria.enable = true;
 
-  fonts = {
-    enableDefaultPackages = false;
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-emoji
-      nerd-fonts.jetbrains-mono
-      nanum
-    ];
-    fontconfig = {
-      enable = true;
-      defaultFonts.serif = [ "NanumSquareRound Bold" ];
-      defaultFonts.sansSerif = [ "NanumSquareRound Bold" ];
-      defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
-      defaultFonts.emoji = [ "Noto Color Emoji" ];
-    };
-  };
-
-  services.tailscale = {
-    enable = true;
-    extraUpFlags = [ "--accept-routes" ];
-  };
-
   # services.desktopManager.cosmic.enable = true;
   # services.displayManager.cosmic-greeter.enable = true;
 
@@ -238,10 +214,6 @@
     loadModels = [
       "deepseek-coder-v2:16b"
     ];
-  };
-
-  services.postgresql = {
-    enable = true;
   };
 
   xdg.terminal-exec.enable = true;
@@ -376,10 +348,7 @@
   # };
 
   environment.systemPackages = with pkgs; [
-    # inputs.neovim-overlay.packages.${pkgs.system}.default
-    # git
-    zellij
-    helix
+    inputs.neovim-overlay.packages.${pkgs.system}.default
     yazi
     ffmpeg
     p7zip
@@ -442,31 +411,7 @@
     immich-cli
     opencode
     deploy-rs
-
-    # valgrind
-    # mono
-    # temurin-bin
-    # spring-boot-cli
-    # gradle
-    # kotlin
-    typst
-    ansible
-    sqlite
-    postgresql
-    pgcli
-    mariadb
-    usql
-    jdt-language-server
-    bash-language-server
-    tinymist
-    sqls
-    ansible-language-server
-    yaml-language-server
-    taplo
-    # docker-language-server
-    dockerfile-language-server-nodejs
-    docker-compose-language-service
-    lsp-ai
+    cava
 
     # neovide
     # zathura
@@ -484,7 +429,6 @@
     # blender
     # grimblast
     # hyprpicker
-    cava
     trashy
     localsend
     udiskie
@@ -514,24 +458,13 @@
     # qalculate-gtk
     # shotcut
     # kmod
-    # fanctl
-    # fan2go
     batmon
-    # cacert
-    # gnome-shell
     kubectl
     kubectx
     # minikube
     kubernetes-helm
     k9s
     pandoc
-    # audacity
-    # lmms
-    # famistudio
-    # klystrack # WARN sdl compile error
-    # furnace
-    # ldtk
-    # pixelorama
     # wgpu-native
     # sdl3
     peazip
