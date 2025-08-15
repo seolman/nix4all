@@ -297,6 +297,7 @@
     };
   };
 
+  # ERROR: 1.137
   services.immich = {
     enable = true;
     host = "0.0.0.0";
@@ -312,6 +313,15 @@
 
   # TODO
   # services.home-home-assistant = {};
+
+  # services.zigbee2mqtt = {};
+
+  services.nextcloud = {
+    enable = true;
+    config.dbtype = "pgsql";
+  };
+
+  # TODO docmost not in nixpkgs
 
   system.stateVersion = "25.05";
 }
