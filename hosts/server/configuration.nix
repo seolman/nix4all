@@ -87,10 +87,6 @@
     enable = true;
   };
 
-  services.openssh = {
-    enable = true;
-  };
-
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
@@ -161,16 +157,6 @@
       };
     };
   };
-
-  # # TODO
-  # services.mongodb = {
-  #   enable = true;
-  # };
-
-  # # TODO
-  # services.neo4j = {
-  #   enable = true;
-  # };
 
   # TODO
   services.elasticsearch = {
