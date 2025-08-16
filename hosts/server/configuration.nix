@@ -159,7 +159,7 @@
   };
 
   services.mongodb = {
-    package = pkgs.mongodb;
+    package = lib.mkForce pkgs.mongodb;
   };
 
   # TODO
