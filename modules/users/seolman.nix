@@ -77,7 +77,7 @@
           select = "underline";
         };
         file-picker = {
-          hidden = true;
+          hidden = false;
         };
         auto-save = {
           after-delay.enable = true;
