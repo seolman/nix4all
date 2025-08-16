@@ -158,6 +158,10 @@
     };
   };
 
+  services.mongodb = {
+    package = pkgs.mongodb;
+  };
+
   # TODO
   services.elasticsearch = {
     enable = true;
