@@ -11,7 +11,10 @@
     age.sshKeyPaths = [
       "/home/seolman/.ssh/secret"
     ];
-    secrets."ssh/ed25519" = { };
+    secrets."ssh/ed25519" = {
+      owner = "root";
+      mode = "0600";
+    };
     secrets."tailscale/authKeyFile" = { };
     secrets."syncthing/nixosServer" = { };
     secrets."mongodb/password" = { };
@@ -85,12 +88,12 @@
     enable = true;
     settings.PermitRootLogin = "no";
     settings.PasswordAuthentication = false;
-    # hostKeys = [
-    #   {
-    #     type = "ed25519";
-    #     path = config.sops.secrets."ssh/ed25519".path;
-    #   }
-    # ];
+    hostKeys = [
+      {
+        type = "ed25519";
+        path = config.sops.secrets."ssh/ed25519".path;
+      }
+    ];
   };
 
   services.postgresql = {

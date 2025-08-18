@@ -365,6 +365,7 @@
     peazip
     # figma-linux
     # notion-app-enhanced
+    bootdev-cli
 
     # mangohud
     # protonup-qt

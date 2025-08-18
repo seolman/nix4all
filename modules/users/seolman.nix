@@ -43,8 +43,7 @@
         true-color = true;
         color-modes = true;
         popup-border = "popup";
-        end-of-line-diagnostics = "hint";
-        # auto-pairs = false;
+        auto-pairs = false;
         statusline = {
           left = [
             "mode"
@@ -88,7 +87,7 @@
           enable = true;
           supersede-menu = true;
         };
-        inline-diagnostics.cursor-line = "warning";
+        inline-diagnostics.cursor-line = "hint";
       };
       keys.insert = {
         "C-[" = "normal_mode";
@@ -98,6 +97,9 @@
         "C-p" = ["page_cursor_half_down" "align_view_center"];
         tab = "expand_selection";
         S-tab = "shrink_selection";
+        " " = {
+          i = ":toggle-option lsp.display-inlay-hints";
+        };
       };
     };
   };
