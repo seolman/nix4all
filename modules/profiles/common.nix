@@ -5,16 +5,12 @@
   ...
 }:
 {
-  # TODO: fix secret key
   sops = {
     defaultSopsFile = ../../secrets.yaml;
+    # TODO: fix secret key
     age.sshKeyPaths = [
       "/home/seolman/.ssh/secret"
     ];
-    secrets."ssh/ed25519" = {
-      owner = "root";
-      mode = "0600";
-    };
     secrets."tailscale/authKeyFile" = { };
     secrets."syncthing/nixosServer" = { };
     secrets."mongodb/password" = { };
@@ -88,12 +84,6 @@
     enable = true;
     settings.PermitRootLogin = "no";
     settings.PasswordAuthentication = false;
-    hostKeys = [
-      {
-        type = "ed25519";
-        path = config.sops.secrets."ssh/ed25519".path;
-      }
-    ];
   };
 
   services.postgresql = {
@@ -139,6 +129,12 @@
     };
   };
 
+  services.mpd = {
+    enable = true;
+    network.port = 6600;
+    network.listenAddress = "any";
+  };
+
   # services.neo4j = {
   #   enable = true;
   # };
@@ -148,6 +144,8 @@
 
     zellij
     helix
+
+    mongosh
   ];
 
   environment.variables = {

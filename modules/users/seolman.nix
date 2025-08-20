@@ -38,10 +38,13 @@
         line-number = "relative";
         continue-comments = false;
         completion-timeout = 5;
+        preview-completion-insert = false;
         completion-trigger-len = 1;
-        completion-replace = true;
+        # completion-replace = true;
         true-color = true;
+        undercurl = true;
         color-modes = true;
+        trim-trailing-whitespace = true;
         popup-border = "popup";
         auto-pairs = false;
         statusline = {
