@@ -85,10 +85,10 @@
     go
     gopls
 
-    python313Full
+    python3Full
     uv
     # python313Packages.python-lsp-server
-    python313Packages.jedi-language-server
+    # python313Packages.jedi-language-server
     ruff
 
     gcc
@@ -110,8 +110,7 @@
 
     rustc
     cargo
-    # ERROR: different hash
-    # rust-analyzer
+    rust-analyzer
 
     marksman
     markdown-oxide

@@ -27,6 +27,7 @@
       443
       8384
       3000
+      5000
     ];
   };
 
@@ -315,6 +316,11 @@
   # };
 
   # TODO docmost not in nixpkgs
+
+  services.kavita = {
+    enable = true;
+    settings.Port = 5000;
+  };
 
   system.stateVersion = "25.05";
 }
