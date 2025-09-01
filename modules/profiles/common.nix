@@ -164,25 +164,6 @@
     nanum
   ];
 
-  stylix = {
-    enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
-    image = config.lib.stylix.pixel "base00";
-    fonts = {
-      serif.name = "NanumSquareRound Bold";
-      sansSerif.name = "NanumSquareRound Bold";
-      monospace.name = "JetBrainsMono Nerd Font";
-      emoji.name = "Noto Color Emoji";
-      sizes = {
-        applications = 12;
-        desktop = 10;
-        popups = 10;
-        terminal = 14;
-      };
-    };
-    polarity = "dark";
-  };
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
