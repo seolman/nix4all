@@ -223,53 +223,53 @@
   # };
 
   # TODO
-  services.jellyfin = {
-    enable = true;
-    group = "media";
-    openFirewall = true;
-  };
+  # services.jellyfin = {
+  #   enable = true;
+  #   group = "media";
+  #   openFirewall = true;
+  # };
 
-  services.flaresolverr = {
-    enable = true;
-    openFirewall = true;
-    port = 8191;
-  };
+  # services.flaresolverr = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   port = 8191;
+  # };
 
-  services.prowlarr = {
-    enable = true;
-    openFirewall = true;
-    settings.server.port = 9696;
-  };
+  # services.prowlarr = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   settings.server.port = 9696;
+  # };
 
-  services.radarr = {
-    enable = true;
-    user = "jellyfin";
-    group = "media";
-    openFirewall = true;
-    settings.server.port = 7878;
-  };
+  # services.radarr = {
+  #   enable = true;
+  #   user = "jellyfin";
+  #   group = "media";
+  #   openFirewall = true;
+  #   settings.server.port = 7878;
+  # };
 
-  services.sonarr = {
-    enable = true;
-    openFirewall = true;
-    settings.server.port = 8989;
-  };
+  # services.sonarr = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   settings.server.port = 8989;
+  # };
 
-  services.bazarr = {
-    enable = true;
-  };
+  # services.bazarr = {
+  #   enable = true;
+  # };
 
-  services.lidarr = {
-    enable = true;
-  };
+  # services.lidarr = {
+  #   enable = true;
+  # };
 
-  services.readarr = {
-    enable = true;
-  };
+  # services.readarr = {
+  #   enable = true;
+  # };
 
-  services.jellyseerr = {
-    enable = true;
-  };
+  # services.jellyseerr = {
+  #   enable = true;
+  # };
 
   services.syncthing = {
     enable = true;
@@ -290,7 +290,6 @@
     };
   };
 
-  # ERROR: 1.137
   services.immich = {
     enable = true;
     host = "0.0.0.0";
