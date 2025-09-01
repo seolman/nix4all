@@ -16,6 +16,7 @@
     secrets."mongodb/password" = { };
     secrets."postgresql/password" = { };
     secrets."redis/password" = { };
+    secrets."kavita/tokenKeyFile" = {};
   };
 
   time.timeZone = "Asia/Seoul";

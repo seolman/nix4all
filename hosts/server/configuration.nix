@@ -320,6 +320,7 @@
   services.kavita = {
     enable = true;
     settings.Port = 5000;
+    tokenKeyFile = config.sops.secrets."kavita/tokenKeyFile".path;
   };
 
   system.stateVersion = "25.05";
