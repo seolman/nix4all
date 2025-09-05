@@ -307,6 +307,7 @@
     opencode
     deploy-rs
     cava
+    crush
 
     # neovide
     # zathura

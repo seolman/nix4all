@@ -79,7 +79,8 @@
     enable = true;
     acceleration = "rocm";
     loadModels = [
-      "deepseek-coder-v2:16b"
+      # "deepseek-coder-v2:16b"
+      "gpt-oss:20b"
     ];
   };
 
@@ -118,6 +119,7 @@
     lldb
     cmake
     clang-tools
+    bear
 
     temurin-bin
     spring-boot-cli
